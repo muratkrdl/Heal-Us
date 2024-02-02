@@ -55,15 +55,17 @@ public class GameManager : MonoBehaviour
             return canUseAbility;
         }
     }
-    public bool SetCanUseAbility
+    public void SetFalseCanUseAbility()
     {
-        set
-        {
-            canUseAbility = value;
-        }
+        canUseAbility = false;
+    }
+    public void SetTrueCanUseAbility()
+    {
+        canUseAbility = true;
     }
 #endregion
 
+//to do
 #region DamageMultiplier
     public float DamageMultiplier
     {
@@ -75,9 +77,9 @@ public class GameManager : MonoBehaviour
     public void CalculatePlayerDamage()
     {
         damageMultiplier = 0;
-        foreach(var item in villagers)
+        foreach(var villager in villagers)
         {
-            if(!item.isInfected)
+            if(!villager.GetIsInfected)
             {
                 damageMultiplier += increaseDamageMultiplier;
             }
@@ -156,9 +158,9 @@ public class GameManager : MonoBehaviour
 
     public bool CheckGameLose()
     {
-        foreach (var item in villagers)
+        foreach (Villager villager in villagers)
         {
-            if(!item.isInfected)
+            if(!villager.GetIsInfected)
             {
                 return false;
             }
@@ -166,23 +168,25 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
-    public Transform GetNewVillage(Transform target)
+    public Transform GetNewTarget(Transform target)
     {
         foreach (Villager villager in villagers)
         {
-            if(target == null) { target = villagers[0].transform; }
-            if(villager.GetComponent<Villager>().isInfected) 
-            { 
-                if(CheckGameLose())
-                {
-                    monster.SetMaxDistanceForPlayer(60);
-                    target = GetPlayer;
-                } 
-                continue; 
-            }
-            if(Mathf.Abs(Vector3.Distance(villager.transform.position,transform.position)) < Mathf.Abs(Vector3.Distance(target.position,transform.position)))
+            if(villager.GetIsInfected) 
             {
-                target = villager.transform;
+                continue;
+            }
+            else
+            {
+                Debug.Log(Mathf.Abs(Vector3.Distance(villager.transform.position, monster.transform.position)));
+
+                float a = Mathf.Abs(Vector3.Distance(villager.transform.position, monster.transform.position));
+                float b = Mathf.Abs(Vector3.Distance(target.position, monster.transform.position));
+                if(target.GetComponent<Villager>() != null && target.GetComponent<Villager>().GetIsInfected) { b = Mathf.Infinity; }
+                if(a < b) 
+                {
+                    target = villager.transform;
+                }
             }
         }
         return target;

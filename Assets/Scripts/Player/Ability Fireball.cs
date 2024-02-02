@@ -7,6 +7,8 @@ public class AbilityFireball : MonoBehaviour
     [SerializeField] GameObject fireballPrefab;
     [SerializeField] Transform fireballSpawnPosition;
 
+    [SerializeField] FPSAnimation fpsAnimator;
+
     [SerializeField] Transform lookPos;
 
     [SerializeField] KeyCode keyCode;
@@ -31,8 +33,13 @@ public class AbilityFireball : MonoBehaviour
         }
         if(Input.GetKeyDown(keyCode) && canThrowball && GameManager.Instance.GetCanUseAbility)
         {
-            StartCoroutine(ThrowBall());
+            fpsAnimator.Fireball();
         }    
+    }
+
+    public void ThrowFireBall()
+    {
+        StartCoroutine(ThrowBall());
     }
 
     IEnumerator ThrowBall()

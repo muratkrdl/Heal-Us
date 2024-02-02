@@ -9,7 +9,7 @@ public class Lightning : MonoBehaviour
     [SerializeField] float manaCost;
     [SerializeField] float damage;
 
-    [SerializeField] GameObject missedLightningFXPrefab;
+    [SerializeField] BoxCollider boxCollider;
 
     public float GetDamage
     {
@@ -43,8 +43,16 @@ public class Lightning : MonoBehaviour
     {
         if(other.CompareTag("Monster"))
         {
-            MonsterHP.Instance.DecreaseHP(damage);
-            other.GetComponent<Monster>().MonsterStunned(stunTime,true);
+            if(other.TryGetComponent<Monster>(out var monster))
+            {
+                boxCollider.enabled = false;
+                MonsterHP.Instance.DecreaseHP(damage);
+                other.GetComponent<Monster>().MonsterStunned(stunTime,true);
+            }
+            else if(other.TryGetComponent<StoneMonster>(out var stoneMonster))
+            {
+                stoneMonster.StartKYS();
+            }
         }
     }
 

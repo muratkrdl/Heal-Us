@@ -8,6 +8,7 @@ public class AbilityPoison : MonoBehaviour
     [SerializeField] Poison poisonPrefab;
 
     [SerializeField] FirstPersonController firstPersonController;
+    [SerializeField] FPSAnimation fpsAnimator;
 
     [SerializeField] KeyCode keyCode;
 
@@ -34,8 +35,13 @@ public class AbilityPoison : MonoBehaviour
         }
         if(Input.GetKeyDown(keyCode) && canUsePoison && GameManager.Instance.GetCanUseAbility)
         {
-            StartCoroutine(OpenPoisonAbility());
+            fpsAnimator.Poison();
         }    
+    }
+
+    public void ThrowIcePotion()
+    {
+        StartCoroutine(OpenPoisonAbility());
     }
 
     IEnumerator OpenPoisonAbility()

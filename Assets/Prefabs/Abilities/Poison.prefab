@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poisonVFX: {fileID: 940921596628611820}
-  lifeTime: 2
+  lifeTime: 1.8
   manaCost: 150
   damage: 9
 --- !u!1001 &1421575887626641763

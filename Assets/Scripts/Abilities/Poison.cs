@@ -46,5 +46,4 @@ public class Poison : MonoBehaviour
             poisonVFX.Stop();
     }
 
-
 }

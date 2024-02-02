@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using DigitalRuby.LightningBolt;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class AbilityLightning : MonoBehaviour
 {
     [SerializeField] GameObject lightningPrefab;
+
+    [SerializeField] FPSAnimation fpsAnimator;
 
     [SerializeField] float range;
 
@@ -36,8 +37,13 @@ public class AbilityLightning : MonoBehaviour
         }
         if(Input.GetKeyDown(keyCode) && canUseLightning && GameManager.Instance.GetCanUseAbility)
         {
-            StartCoroutine(UseLightning());
-        }    
+            fpsAnimator.Lightning();
+        }
+    }
+
+    public void ThrowLightning()
+    {
+        StartCoroutine(UseLightning());
     }
 
     IEnumerator UseLightning()

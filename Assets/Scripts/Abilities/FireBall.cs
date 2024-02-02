@@ -98,7 +98,14 @@ public class FireBall : MonoBehaviour
         {
             StopAllCoroutines();
             //Low Damage
-            other.GetComponent<Monster>().MonsterStunned(stunTime,false);
+            if(other.TryGetComponent<Monster>(out var monster))
+            {
+                monster.MonsterStunned(stunTime,false);
+            }
+            else if(other.TryGetComponent<StoneMonster>(out var stoneMonster))
+            {
+                stoneMonster.StartKYS();
+            }
             DisableBall();
             StartCoroutine(KYS(0));
         }

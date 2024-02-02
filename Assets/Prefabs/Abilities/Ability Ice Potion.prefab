@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8234570342891094012}
   m_Layer: 12
   m_Name: Ability Ice Potion
-  m_TagString: Mana Pickup
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,7 +161,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f6e6df929bf43694aa91842161c65ea6, type: 2}
+  - {fileID: 2100000, guid: 68cbca23b14b06d4485c2db15cf8546e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -239,8 +239,7 @@ MonoBehaviour:
   stunTime: 2
   manaCost: 250
   damage: 50
-  missedLightningFXPrefab: {fileID: 9209194014748940716, guid: 986130192c2ecea40acd602e7e6fb22d,
-    type: 3}
+  boxCollider: {fileID: 6948250752541255760}
 --- !u!1 &8218607978720563138
 GameObject:
   m_ObjectHideFlags: 0

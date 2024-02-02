@@ -22,10 +22,10 @@ public class Raycast : MonoBehaviour
         if(Physics.Raycast(playerCam.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, range,layerMask))
         {
             var villager = hit.transform.GetComponent<Villager>();
-            if(villager.isInfected)
+            if(villager.GetIsInfected)
             {
                 Debug.Log("healed");
-                villager.isInfected = false;
+                villager.GetHealFromPlayer();
                 //heal animation;
             }
             else

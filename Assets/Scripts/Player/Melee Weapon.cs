@@ -25,7 +25,11 @@ public class MeleeWeapon : MonoBehaviour
         {
             if(hitData.transform.CompareTag("Monster"))
             {
-                //decrease monster hp;
+                if(hitData.transform.TryGetComponent<StoneMonster>(out var stoneMonster))
+                {
+                    stoneMonster.StartKYS();
+                    return;
+                }
                 MonsterHP.Instance.DecreaseHP(damage);
             }
         }

@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class IcePickup : MonoBehaviour
 {
+    [SerializeField] float stopParticleTime;
+
+    [SerializeField] ParticleSystem spawnParticleSystem;
+
+    void Start() 
+    {
+        StartCoroutine(StopParticleSystem());
+    }
+
+    IEnumerator StopParticleSystem()
+    {
+        yield return new WaitForSeconds(stopParticleTime);
+        spawnParticleSystem.Stop();
+    }
+
     void OnTriggerEnter(Collider other) 
     {
         if(other.CompareTag("Player"))
         {
             if(IcePotions.Instance.GetCurrentCount >= IcePotions.Instance.GetMaxCount) { return; }
             IcePotions.Instance.IncreasePotionCount();
+            if(GetComponentInParent<PotionSpawnPoint>() != null)
+            {
+                GetComponentInParent<PotionSpawnPoint>().StartTimerForPotion();
+            }
             Destroy(gameObject);
         }
     }

@@ -7,6 +7,8 @@ public class UseIcePotion : MonoBehaviour
     [SerializeField] GameObject iceAbility;
     [SerializeField] Transform throwPosition;
 
+    [SerializeField] FPSAnimation fpsAnimator;
+
     [SerializeField] float range;
 
     [SerializeField] KeyCode keyCode;
@@ -16,12 +18,15 @@ public class UseIcePotion : MonoBehaviour
         if(Input.GetKeyDown(keyCode) && GameManager.Instance.GetCanUseAbility)
         {
             if(IcePotions.Instance.GetCurrentCount <= 0) { return; }
-            //Use Skill
-            var ice = Instantiate(iceAbility,throwPosition.position,Quaternion.identity);
-            ice.GetComponent<AbilityIcePotion>().ThrowPotion(RaycastForMousePos());
-
-            IcePotions.Instance.DecreasePotionCount();
+            fpsAnimator.Throw();
         }
+    }
+
+    public void ThroeIcePotion()
+    {
+        var ice = Instantiate(iceAbility,throwPosition.position,Quaternion.identity);
+        ice.GetComponent<AbilityIcePotion>().ThrowPotion(RaycastForMousePos());
+        IcePotions.Instance.DecreasePotionCount();
     }
 
     Vector3 RaycastForMousePos()
@@ -30,7 +35,7 @@ public class UseIcePotion : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hitData, range))
         {
-            direction = hitData.point - transform.position;
+            direction = (hitData.point - transform.position).normalized;
         }
         return direction;
     }

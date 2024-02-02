@@ -14,7 +14,7 @@ public class AbilityIcePotion : MonoBehaviour
 
     void Start() 
     {
-        rotateVector = Random.insideUnitSphere.normalized;    
+        rotateVector = Random.insideUnitSphere.normalized;
     }
 
     void FixedUpdate() 
@@ -30,7 +30,7 @@ public class AbilityIcePotion : MonoBehaviour
     void OnCollisionEnter(Collision other) 
     {
         Instantiate(IceFX,transform.position,Quaternion.identity);
-        Destroy(gameObject);
+        Destroy(gameObject,.1f);
     }
 
 }
