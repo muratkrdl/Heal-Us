@@ -16,8 +16,16 @@ public class StoneMonster : MonoBehaviour
 
     [SerializeField] float damage;
 
+    [SerializeField] float minLifeTime;
+    [SerializeField] float maxLifeTime;
+
+    float lifeTime;
+
     void Start() 
     {
+        transform.LookAt(GameManager.Instance.GetPlayer.transform);
+        lifeTime = Random.Range(minLifeTime,maxLifeTime);
+        StartCoroutine(LifeTimeKYS());
         StartCoroutine(StartDestination());
     }
 
@@ -42,6 +50,12 @@ public class StoneMonster : MonoBehaviour
 
     public void StartKYS()
     {
+        StartCoroutine(KYS());
+    }
+
+    IEnumerator LifeTimeKYS()
+    {
+        yield return new WaitForSeconds(lifeTime);
         StartCoroutine(KYS());
     }
 

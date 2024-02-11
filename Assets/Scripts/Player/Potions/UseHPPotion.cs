@@ -6,11 +6,13 @@ public class UseHPPotion : MonoBehaviour
 {
     [SerializeField] float hpAmount;
 
+    [SerializeField] KeyCode keyCode;
+
     void Update() 
     {
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(Input.GetKeyDown(keyCode))
         {
-            if(PlayerHP.Instance.GetCurrentHP >= PlayerHP.Instance.GetMaxHP - 1 || HPPotions.Instance.GetCurrentCount <= 0) { return; }
+            if(PlayerHP.Instance.GetCurrentHP >= PlayerHP.Instance.MaxHP - 1 || HPPotions.Instance.GetCurrentCount <= 0) { return; }
             PlayerHP.Instance.IncreaseHP(hpAmount);
             HPPotions.Instance.DecreasePotionCount();
         }    

@@ -13,14 +13,25 @@ public class MonsterCollisionParticle : MonoBehaviour
 
     int poisonComplier;
 
-    void OnParticleCollision(GameObject other) 
+    public int PoisonDamage
     {
-        Debug.Log("hitted");
-        poisonComplier++;
-        if(!isPoisened) { StartCoroutine(GetPoisonDamage()); }
+        get
+        {
+            return poisonDamageCounter;
+        }
+        set
+        {
+            poisonDamageCounter = value;
+        }
     }
 
-    IEnumerator GetPoisonDamage()
+    void OnParticleCollision(GameObject other) 
+    {
+        poisonComplier++;
+        if(!isPoisened) { StartCoroutine(GetDamageFromPoison()); }
+    }
+
+    IEnumerator GetDamageFromPoison()
     {
         isPoisened = true;
         poisonFX.Play();
@@ -28,14 +39,13 @@ public class MonsterCollisionParticle : MonoBehaviour
         int damage = Mathf.RoundToInt(poisonComplier / poisonDamageDecreaseComplierAmount);
         for (int i = 0; i < poisonDamageCounter; i++)
         {
-            MonsterHP.Instance.DecreaseHP(damage);
-            Debug.Log(damage);
+            MonsterHP.Instance.DecreaseHP(damage * DamageMultiplier.Instance.GetDamageMultiplierValue);
             yield return new WaitForSeconds(1);
         }
         poisonFX.Stop();
         poisonComplier = 0;
         isPoisened = false;
-        StopCoroutine(GetPoisonDamage());
+        StopCoroutine(GetDamageFromPoison());
     }
 
 }

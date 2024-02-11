@@ -16,11 +16,15 @@ public class PlayerHP : MonoBehaviour
 
     float targetHP;
 
-    public float GetMaxHP    
+    public float MaxHP
     {
         get
         {
             return maxHP;
+        }
+        set
+        {
+            maxHP = value;
         }
     }
 
@@ -51,15 +55,15 @@ public class PlayerHP : MonoBehaviour
 
     public void IncreaseHP(float amount)
     {
-        StartCoroutine(SmoothHPVisual(amount));
+        StartCoroutine(SmoothHPVisual(amount,true));
     }
 
     public void DecreaseHP(float amount)
     {
-        StartCoroutine(SmoothHPVisual(-amount));
+        StartCoroutine(SmoothHPVisual(-amount,false));
     }
 
-    IEnumerator SmoothHPVisual(float amount)
+    IEnumerator SmoothHPVisual(float amount,bool increase)
     {
         targetHP += amount;
         while(true)
@@ -74,11 +78,20 @@ public class PlayerHP : MonoBehaviour
                 //Die
             }
 
-            if(Mathf.Abs(currentHP - targetHP) <= .2f)
+            if(Mathf.Abs(currentHP - targetHP) <= .02f)
             {
+                if(increase) { currentHP += 1; }
+                Mathf.RoundToInt(currentHP);
+                hpSlider.value = currentHP;
                 break;
             }
         }
         StopAllCoroutines();
     }
+
+    public void UpdateValue()
+    {
+        hpSlider.maxValue = maxHP;
+    }
+
 }

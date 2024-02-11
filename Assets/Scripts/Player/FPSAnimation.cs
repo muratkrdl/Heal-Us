@@ -10,7 +10,14 @@ public class FPSAnimation : MonoBehaviour
     [SerializeField] AbilityLightning abilityLightning;
     [SerializeField] AbilityPoison abilityPoison;
     [SerializeField] UseIcePotion useIcePotion;
+    [SerializeField] AbilityHeal abilityHeal;
 
+    public void Melee()
+    {
+        animator.SetTrigger("melee");
+    }
+
+#region CanUseAbility
     public void SetFalseCanUseAbility()
     {
         if(GameManager.Instance.GetCanUseAbility)
@@ -18,7 +25,6 @@ public class FPSAnimation : MonoBehaviour
             GameManager.Instance.SetFalseCanUseAbility();
         }
     }
-
     public void SetTrueCanUseAbility()
     {
         if(!GameManager.Instance.GetCanUseAbility)
@@ -26,16 +32,34 @@ public class FPSAnimation : MonoBehaviour
             GameManager.Instance.SetTrueCanUseAbility();
         }    
     }
+#endregion
 
-    public void Melee()
-    {
-        animator.SetTrigger("melee");
-    }
-
+#region Heal
     public void Heal()
     {
         animator.SetTrigger("heal");
     }
+    public void HealAnimationEvent()
+    {
+        abilityHeal.HealAnimationEvent();
+    }
+    public void HealStartVisualArea()
+    {
+        abilityHeal.StartFillArea();
+    }
+    public void HealHideVisualArea()
+    {
+        abilityHeal.HideVisualArea();
+    }
+    public void HealingTrue()
+    {
+        abilityHeal.HealingTrue();
+    }
+    public void HealingFalse()
+    {
+        abilityHeal.HealingFalse();
+    }
+#endregion
 
 #region IcePotion
     public void Throw()
@@ -108,5 +132,10 @@ public class FPSAnimation : MonoBehaviour
         animator.speed = 2f;
     }
 #endregion
+
+    public void Idle()
+    {
+        animator.SetTrigger("idle");
+    }
 
 }

@@ -13,6 +13,7 @@ namespace StarterAssets
 	public class FirstPersonController : MonoBehaviour
 	{
 		[SerializeField] FPSAnimation fpsAnimator;
+		[SerializeField] LevelUpPanel levelUpPanel;
 
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -115,6 +116,7 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			if(levelUpPanel.GetIsThinking) { return; }
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -146,6 +148,7 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
+			if(levelUpPanel.GetIsThinking) { return; }
 			CameraRotation();
 		}
 

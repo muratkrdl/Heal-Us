@@ -30,11 +30,15 @@ public class Stamina : MonoBehaviour
         }
     }
 
-    public float GetMaxStamina
+    public float MaxStamina
     {
         get
         {
             return maxStamina;
+        }
+        set
+        {
+            maxStamina = value;
         }
     }
 
@@ -103,13 +107,22 @@ public class Stamina : MonoBehaviour
         {
             yield return null;
             currentStamina += Time.deltaTime * increaseSpeed;
+            Mathf.RoundToInt(currentStamina);
             staminaSlider.value = currentStamina;
             if(currentStamina >= maxStamina - .1f)
             {
+                currentStamina = maxStamina;
+                staminaSlider.value = currentStamina;
                 break;
             }
         }
         StopCoroutine(IncreaseStamina());
+    }
+
+    public void LevelUpMaxStamina()
+    {
+        if(currentStamina < maxStamina) { return; }
+        StartCoroutine(IncreaseStamina());
     }
 
     public void IncreaseStaminaWithPotion(float amount)
@@ -126,6 +139,11 @@ public class Stamina : MonoBehaviour
         yield return new WaitForSeconds(waitForLoadTime);
         waiting = false;
         StopCoroutine(WaitForLoad());
+    }
+
+    public void UpdateValue()
+    {
+        staminaSlider.maxValue = maxStamina;
     }
 
 }

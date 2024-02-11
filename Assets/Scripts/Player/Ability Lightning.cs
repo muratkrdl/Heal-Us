@@ -14,6 +14,8 @@ public class AbilityLightning : MonoBehaviour
     [SerializeField] KeyCode keyCode;
 
     [SerializeField] int abilityCD;
+
+    [SerializeField] int damage;
     
     int currentAbilityCD;
 
@@ -22,6 +24,18 @@ public class AbilityLightning : MonoBehaviour
     Vector3 mousePos;
     Vector3 startPos;
     Vector3 endPos;
+
+    public int Damage
+    {
+        get
+        {
+            return damage;
+        }
+        set
+        {
+            damage = value;
+        }
+    }
 
     void Awake() 
     {
@@ -54,6 +68,7 @@ public class AbilityLightning : MonoBehaviour
         RaycastForMousePos();
 
         var lightning = Instantiate(lightningPrefab,mousePos,Quaternion.identity);
+        lightning.GetComponent<Lightning>().SetDamage = damage;
 
         endPos = mousePos + new Vector3(0,-5,0);
         startPos = endPos + new Vector3(0,20,0);

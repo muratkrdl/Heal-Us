@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,13 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image poisonBG;
     [SerializeField] TextMeshProUGUI poisonCDText;
 
-    [SerializeField] Monster monster;
     [SerializeField] Villager[] villagers;
+    [SerializeField] Transform monster;
     [SerializeField] Transform player;
 
-    [SerializeField] float increaseDamageMultiplier;
-
-    float damageMultiplier;
+    [SerializeField] Image healFillArea;
 
     bool canUseAbility;
 
@@ -45,6 +44,19 @@ public class GameManager : MonoBehaviour
         DisableLightningCDCounter();
         DisablePoisonCDCounter();
         canUseAbility = true;
+        healFillArea.fillAmount = 0;
+    }
+
+    public float HealFillAreaFillAmount
+    {
+        get
+        {
+            return healFillArea.fillAmount;
+        }
+        set
+        {
+            healFillArea.fillAmount = value;
+        }
     }
 
 #region CanUseAbility
@@ -62,28 +74,6 @@ public class GameManager : MonoBehaviour
     public void SetTrueCanUseAbility()
     {
         canUseAbility = true;
-    }
-#endregion
-
-//to do
-#region DamageMultiplier
-    public float DamageMultiplier
-    {
-        get
-        {
-            return damageMultiplier;
-        }
-    }
-    public void CalculatePlayerDamage()
-    {
-        damageMultiplier = 0;
-        foreach(var villager in villagers)
-        {
-            if(!villager.GetIsInfected)
-            {
-                damageMultiplier += increaseDamageMultiplier;
-            }
-        }
     }
 #endregion
 
@@ -178,10 +168,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log(Mathf.Abs(Vector3.Distance(villager.transform.position, monster.transform.position)));
-
                 float a = Mathf.Abs(Vector3.Distance(villager.transform.position, monster.transform.position));
-                float b = Mathf.Abs(Vector3.Distance(target.position, monster.transform.position));
+                float b = Mathf.Abs(Vector3.Distance(target.position, monster.position));
                 if(target.GetComponent<Villager>() != null && target.GetComponent<Villager>().GetIsInfected) { b = Mathf.Infinity; }
                 if(a < b) 
                 {
@@ -200,7 +188,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public Monster GetMonster
+    public Transform GetMonster
     {
         get
         {

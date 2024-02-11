@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class AbilityFireball : MonoBehaviour
@@ -14,6 +15,21 @@ public class AbilityFireball : MonoBehaviour
     [SerializeField] KeyCode keyCode;
 
     [SerializeField] int abilityCD;
+
+    [SerializeField] float damage;
+    [SerializeField] int stunTime;
+
+    public int StunTime
+    {
+        get
+        {
+            return stunTime;
+        }
+        set
+        {
+            stunTime = value;
+        }
+    }
 
     int currentAbilityCD;
 
@@ -51,6 +67,8 @@ public class AbilityFireball : MonoBehaviour
 
         var fireball = Instantiate(fireballPrefab,fireballSpawnPosition.position,Quaternion.identity);
         fireball.GetComponent<FireBall>().ThrowBall(direction);
+        fireball.GetComponent<FireBall>().SetFireBallDamage = damage;
+        fireball.GetComponent<FireBall>().SetStunTime = stunTime;
 
         currentAbilityCD = abilityCD;
         GameManager.Instance.EnableFireballCDCounter();

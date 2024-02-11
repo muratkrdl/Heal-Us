@@ -2,19 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Ice : MonoBehaviour
 {
-    [SerializeField] float lifeTime;
+    [SerializeField] int lifeTime;
     [SerializeField] float slowTime;
     [SerializeField] float slowAmount;
 
     [SerializeField] ParticleSystem iceFX;
     [SerializeField] BoxCollider boxCollider;
 
+    public int SetSlowAmount
+    {
+        set
+        {
+            slowAmount = value;
+        }
+    }
+
+    float slowAmountPercent;
+
     void Start()
     {
         StartCoroutine(KYS());
+        slowAmountPercent = slowAmount / 25;
     }
 
     void OnTriggerEnter(Collider other) 
@@ -24,22 +36,22 @@ public class Ice : MonoBehaviour
             var player = other.GetComponentInChildren<FirstPersonController>();
             if(player != null)
             {
-                player.MoveSpeed /= slowAmount;
-                player.SprintSpeed /= slowAmount;
+                player.MoveSpeed /= slowAmountPercent;
+                player.SprintSpeed /= slowAmountPercent;
             }
         }
         else if(other.CompareTag("Village"))
         {
             if(other.TryGetComponent<Villager>(out var villager))
             {
-                villager.navMeshAgent.speed /= slowAmount;
+                villager.navMeshAgent.speed /= slowAmountPercent;
             }
         }
         else if(other.CompareTag("Monster"))
         {
             if(other.TryGetComponent<Monster>(out var monster))
             {
-                monster.navMeshAgent.speed /= slowAmount;
+                monster.navMeshAgent.speed /= slowAmountPercent;
             }
         }
     }
@@ -51,22 +63,22 @@ public class Ice : MonoBehaviour
             var player = other.GetComponentInChildren<FirstPersonController>();
             if(player != null)
             {
-                player.MoveSpeed *= slowAmount;
-                player.SprintSpeed *= slowAmount;
+                player.MoveSpeed *= slowAmountPercent;
+                player.SprintSpeed *= slowAmountPercent;
             }
         }
         else if(other.CompareTag("Village"))
         {
             if(other.TryGetComponent<Villager>(out var villager))
             {
-                villager.navMeshAgent.speed *= slowAmount;
+                villager.navMeshAgent.speed *= slowAmountPercent;
             }
         }
         else if(other.CompareTag("Monster"))
         {
             if(other.TryGetComponent<Monster>(out var monster))
             {
-                monster.navMeshAgent.speed *= slowAmount;
+                monster.navMeshAgent.speed *= slowAmountPercent;
             }
         }
     }

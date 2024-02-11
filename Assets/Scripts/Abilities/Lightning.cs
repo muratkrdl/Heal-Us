@@ -7,15 +7,16 @@ public class Lightning : MonoBehaviour
     [SerializeField] float lifeTime;
     [SerializeField] float stunTime;
     [SerializeField] float manaCost;
-    [SerializeField] float damage;
 
     [SerializeField] BoxCollider boxCollider;
 
-    public float GetDamage
+    int damage;
+
+    public int SetDamage
     {
-        get
+        set
         {
-            return damage;
+            damage = value;
         }
     }
 
@@ -46,7 +47,7 @@ public class Lightning : MonoBehaviour
             if(other.TryGetComponent<Monster>(out var monster))
             {
                 boxCollider.enabled = false;
-                MonsterHP.Instance.DecreaseHP(damage);
+                MonsterHP.Instance.DecreaseHP(damage * DamageMultiplier.Instance.GetDamageMultiplierValue);
                 other.GetComponent<Monster>().MonsterStunned(stunTime,true);
             }
             else if(other.TryGetComponent<StoneMonster>(out var stoneMonster))

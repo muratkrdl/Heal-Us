@@ -8,21 +8,12 @@ public class Poison : MonoBehaviour
 
     [SerializeField] float lifeTime;
     [SerializeField] float manaCost;
-    [SerializeField] float damage;
 
     public float GetLifeTime
     {
         get
         {
             return lifeTime;
-        }
-    }
-
-    public float GetDamage
-    {
-        get
-        {
-            return damage;
         }
     }
 

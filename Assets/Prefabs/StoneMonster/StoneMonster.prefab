@@ -206,6 +206,8 @@ MonoBehaviour:
   myRenderer: {fileID: 8008542258268073912}
   boxCollider: {fileID: 6929389130608030142}
   damage: 10
+  minLifeTime: 6
+  maxLifeTime: 14
 --- !u!1 &4606795915497047867
 GameObject:
   m_ObjectHideFlags: 0

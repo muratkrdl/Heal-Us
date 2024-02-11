@@ -10,7 +10,17 @@ public class AbilityIcePotion : MonoBehaviour
     [SerializeField] float rotateSpeed;
     [SerializeField] float throwSpeed;
 
+    int slowAmount;
+
     Vector3 rotateVector;
+
+    public int SetSlowAmount
+    {
+        set
+        {
+            slowAmount = value;
+        }
+    }
 
     void Start() 
     {
@@ -30,6 +40,7 @@ public class AbilityIcePotion : MonoBehaviour
     void OnCollisionEnter(Collision other) 
     {
         Instantiate(IceFX,transform.position,Quaternion.identity);
+        IceFX.GetComponent<Ice>().SetSlowAmount = slowAmount;
         Destroy(gameObject,.1f);
     }
 

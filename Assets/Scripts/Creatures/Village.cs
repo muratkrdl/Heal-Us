@@ -4,13 +4,16 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Villager : Creature
+public class Villager : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
     
     [SerializeField] Animator animator;
 
     [SerializeField] Vector2 areaSize;
+
+    [SerializeField] ParticleSystem healVFX;
+    [SerializeField] ParticleSystem infectedVFX;
 
     [SerializeField] float maxViewDistance;
     [SerializeField] float lifeTime;
@@ -27,14 +30,13 @@ public class Villager : Creature
 
     Transform target;
 
-    int index;
-
     bool hasDestination;
 
     bool isInfected;
 
     bool isDead;
 
+    bool isWaiting;
     bool isWalking;
     bool isRunning;
 
@@ -46,22 +48,33 @@ public class Villager : Creature
         }
     }
 
+    public bool GetIsDead
+    {
+        get
+        {
+            return isDead;
+        }
+    }
+
     void Start() 
     {
-        target = GameManager.Instance.GetMonster.transform;
+        target = GameManager.Instance.GetMonster;
         newRandomPos = transform.position;
     }
 
     void Update() 
     {
         if(isDead) { return; }
-        GetDestination(target);
+        GetDestination();
         
+        newRandomPos.y = transform.position.y;
+
         if(Mathf.Abs(Vector3.Distance(newRandomPos,transform.position)) <= .01f && isWalking)
         {
             if(!isWalking) { return; }
             if(isWalking) { isWalking = false; }
-            if(isWalking) { isRunning = false; }
+            if(isRunning) { isRunning = false; }
+            StopCoroutine(CheckWalkingCharacter());
             ResetTriggerWalk();
             ResetTriggerRun();
             animator.SetTrigger("Idle");
@@ -73,6 +86,7 @@ public class Villager : Creature
         if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) <= maxViewDistance)
         {
             hasDestination = true;
+            isWaiting = false;
             isWalking = false;
         }
         else if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) > maxViewDistance + 5f)
@@ -82,15 +96,14 @@ public class Villager : Creature
             ResetTriggerRun();
             animator.SetTrigger("Idle");
             hasDestination = false;
-            isWalking = false;
             isRunning = false;
             StopCoroutine(Escape(target));
         }
     }
 
-    void GetDestination(Transform target)
+    void GetDestination()
     {
-        if(!hasDestination && !isWalking)
+        if(!hasDestination && !isWalking && !isWaiting)
         {
             StartCoroutine(WaitandGoPosition());
         }
@@ -106,23 +119,23 @@ public class Villager : Creature
                 ResetTriggerWalk();
                 animator.SetTrigger("Run");
             }
+            isWaiting = false;
             isWalking = false;
         }
     }
 
     IEnumerator WaitandGoPosition()
     {
+        isWaiting = true;
         isWalking = true;
         yield return new WaitForSeconds(Random.Range(minWaitTime,maxWaitTime));
-
+        isWaiting = false;
         if(hasDestination) 
         {
             StopCoroutine(WaitandGoPosition());
             yield return null;
         }
-        index = Random.Range(0,2);
-        if(index % 2 == 1) { newRandomPos = Random.insideUnitSphere * newPosMinDistance; }
-        else { newRandomPos = Random.insideUnitSphere * newPosMaxDistance; }
+        newRandomPos = Random.insideUnitSphere * Random.Range(newPosMinDistance,newPosMaxDistance);
         newRandomPos.y = 0;
         newRandomPos += transform.position;
         if(Mathf.Abs(newRandomPos.x) < areaSize.x && Mathf.Abs(newRandomPos.z) < areaSize.y)
@@ -131,17 +144,19 @@ public class Villager : Creature
             ResetTriggerRun();
             animator.SetTrigger("Walk");
             navMeshAgent.destination = newRandomPos;
-            StopCoroutine(WaitandGoPosition());
+            StartCoroutine(CheckWalkingCharacter());
         }
-        else
+        else 
         {
             isWalking = false;
             hasDestination = false;
         }
+        StopCoroutine(WaitandGoPosition());
     }
 
     IEnumerator Escape(Transform target)
     {
+        isWaiting = false;
         isWalking = false;
         direction = (transform.position - target.position).normalized;
         newPos = transform.position + direction;
@@ -160,22 +175,52 @@ public class Villager : Creature
 
     public void GetHealFromPlayer()
     {
-        
+        StopAllCoroutines();
+        lifeTime /= 2;
+        isWaiting = false;
+        isWalking = false;
+        isRunning = false;
+        hasDestination = false;
+        infectedVFX.Stop();
+        healVFX.Play();
+        isInfected = false;
     }
 
     public void GetDamageFromMonster()
     {
-        StopAllCoroutines();
-        isInfected = true;
         //Infected and get damage animation
+        StopAllCoroutines();
         ResetTriggerIdle();
         ResetTriggerWalk();
         ResetTriggerRun();
         animator.SetTrigger("GetDamage");
+        isInfected = true;
         hasDestination = false;
+        isWaiting = false;
         isWalking = false;
         isRunning = false;
+        infectedVFX.Play();
         StartCoroutine(StartDieTimer());
+    }
+
+    IEnumerator CheckWalkingCharacter()
+    {
+        Vector3 checkPos = Vector3.zero;
+        while (true)
+        {
+            checkPos = transform.position;
+            yield return new WaitForSeconds(.1f);
+            if(checkPos == transform.position)
+            {
+                //Stop
+                isWaiting = false;
+                isWalking = false;
+                isRunning = false;
+                animator.SetTrigger("Idle");
+                break;
+            }
+        }
+        StopCoroutine(CheckWalkingCharacter());
     }
 
     IEnumerator StartDieTimer()
@@ -186,9 +231,10 @@ public class Villager : Creature
 
     void Die()
     {
+        infectedVFX.Stop();
         isDead = true;
         navMeshAgent.destination = transform.position;
-        if(index == 0)
+        if(Random.Range(0,2) == 0)
         {
             animator.SetTrigger("Die1");
         }

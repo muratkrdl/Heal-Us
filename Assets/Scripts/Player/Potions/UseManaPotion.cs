@@ -6,11 +6,13 @@ public class UseManaPotion : MonoBehaviour
 {
     [SerializeField] float manaAmount;
 
+    [SerializeField] KeyCode keyCode;
+
     void Update() 
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(keyCode))
         {
-            if(Mana.Instance.GetCurrentMana >= Mana.Instance.GetMaxMana - 1 || ManaPotions.Instance.GetCurrentCount <= 0) { return; }
+            if(Mana.Instance.GetCurrentMana >= Mana.Instance.MaxMana - 1 || ManaPotions.Instance.GetCurrentCount <= 0) { return; }
             Mana.Instance.IncreaseMana(manaAmount);
             ManaPotions.Instance.DecreasePotionCount();
         }    

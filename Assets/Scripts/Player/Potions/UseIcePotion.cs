@@ -10,8 +10,21 @@ public class UseIcePotion : MonoBehaviour
     [SerializeField] FPSAnimation fpsAnimator;
 
     [SerializeField] float range;
+    [SerializeField] int slowAmount;
 
     [SerializeField] KeyCode keyCode;
+
+    public int SlowAmount
+    {
+        get
+        {
+            return slowAmount;
+        }
+        set
+        {
+            slowAmount = value;
+        }
+    }
 
     void Update() 
     {
@@ -26,6 +39,7 @@ public class UseIcePotion : MonoBehaviour
     {
         var ice = Instantiate(iceAbility,throwPosition.position,Quaternion.identity);
         ice.GetComponent<AbilityIcePotion>().ThrowPotion(RaycastForMousePos());
+        ice.GetComponent<AbilityIcePotion>().SetSlowAmount = slowAmount;
         IcePotions.Instance.DecreasePotionCount();
     }
 

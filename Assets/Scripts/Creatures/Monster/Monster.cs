@@ -4,7 +4,7 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : Creature
+public class Monster : MonoBehaviour
 {
     public NavMeshAgent navMeshAgent;
 
@@ -13,8 +13,6 @@ public class Monster : Creature
     [SerializeField] ParticleSystem lightningFX;
     [SerializeField] ParticleSystem fireBallStunFX;
 
-    [SerializeField] float waitForAnimationTime;
-
     [SerializeField] float meleeDamage;
 
     [SerializeField] float maxDistanceForPlayer;
@@ -22,7 +20,7 @@ public class Monster : Creature
     [SerializeField] MonsterExplosionAbility explosionAbility;
     [SerializeField] MonsterSpawnAbility spawnAbility;
 
-    [HideInInspector] public Transform target;
+    public Transform target;
 
     [HideInInspector] public bool isAttacking;
 
@@ -31,7 +29,7 @@ public class Monster : Creature
     bool isStunned;
     bool isWalking;
 
-    void Awake() 
+    void Start()
     {
         target = GameManager.Instance.GetPlayer;
         target = GameManager.Instance.GetNewTarget(target);
@@ -44,7 +42,6 @@ public class Monster : Creature
         {
             isWalking = false;
             animator.SetTrigger("Idle");
-            Debug.Log("getnewtarget");
             target = GameManager.Instance.GetNewTarget(target);
         }
         else
@@ -70,26 +67,6 @@ public class Monster : Creature
             isTargetToPlayer = false;
             target = GameManager.Instance.GetNewTarget(target);
         }
-
-        //if(Vector3.Distance(transform.position,target.position) <= maxDistance)
-        //{
-        //    hasDestination = true;
-        //}
-        //else
-        //{
-        //    hasDestination = false;
-        //}
-
-        //if(target == GameManager.Instance.GetPlayer) { return; }
-
-        //if(target.GetComponent<Villager>().isInfected)
-        //{
-        //    hasDestination = false;
-        //    navMeshAgent.destination = transform.position;
-        //    StopAllCoroutines();
-        //    isWalking = false;
-        //    target = GameManager.Instance.GetNewVillage(target);
-        //}
     }
 
     public void MonsterStunned(float time,bool isLightning)
@@ -110,8 +87,6 @@ public class Monster : Creature
     {
         if(isStunned) { StopCoroutine(StunMonster(time)); }
 
-        StartCoroutine(WaitForAnim());
-
         target = transform;
         isStunned = true;
         isWalking = false;
@@ -131,20 +106,6 @@ public class Monster : Creature
         StopCoroutine(StunMonster(time));
     }
 
-    IEnumerator WaitForAnim()
-    {
-        yield return new WaitForSeconds(waitForAnimationTime);
-        if(Random.Range(0,2) %2 == 0)
-        {
-            explosionAbility.SpawnEnergyExplosion();
-        }
-        else
-        {
-            spawnAbility.StartSpawnStoneMonsters();
-        }
-        StopCoroutine(WaitForAnim());
-    }
-
     public void SetMaxDistanceForPlayer(float amount)
     {
         maxDistanceForPlayer = amount;
@@ -161,7 +122,7 @@ public class Monster : Creature
     }
 
 #region AnimationEvents
-        public void MeleeAnimationEvent()
+    public void MeleeAnimationEvent()
     {
         if(target.GetComponent<Villager>() != null)
         {
@@ -176,7 +137,6 @@ public class Monster : Creature
         isWalking = false;
         //hasDestination = false;
     }
-
     public void MeleeAnimationFinishEvent()
     {
         isAttacking = false;
@@ -194,51 +154,53 @@ public class Monster : Creature
         //    isAttacking = false;
         //}
     }
-
     public void WalkAnimationEvent()
     {
         if(isAttacking) { isAttacking = false; }
+        target = GameManager.Instance.GetNewTarget(target);
     }
-
     public void IdleAnimationEvent()
     {
         target = GameManager.Instance.GetNewTarget(target);
+    }
+    public void StunnedAttackAnimationEvent()
+    {
+        if(Random.Range(0,2) %2 == 0)
+        {
+            explosionAbility.SpawnEnergyExplosion();
+        }
+        else
+        {
+            spawnAbility.StartSpawnStoneMonsters();
+        }
     }
 #endregion
 
     public void GetDestination(Transform target)
     {
-        //if(hasDestination)
-            //For Monster
-            if(!isWalking && !isAttacking)
-            {
-                isWalking = true;
-                animator.SetTrigger("Walk");
-            }
-            if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) <= 1.85f)
-            {
-                //bite and bite animation
-                if(isAttacking) { return; }
+        if(!isWalking && !isAttacking)
+        {
+            isWalking = true;
+            animator.SetTrigger("Walk");
+        }
+        if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) <= 1.4f)
+        {
+            //bite and bite animation
+            if(isAttacking) { return; }
 
-                isWalking = false;
-                isAttacking = true;
-                animator.SetTrigger("Melee");
-            }
-            else if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) > 2.2f)
-            {
-                if(!isAttacking) { return; }
+            isWalking = false;
+            isAttacking = true;
+            animator.SetTrigger("Melee");
+        }
+        else if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) > 1.75f)
+        {
+            if(!isAttacking) { return; }
 
-                isAttacking = false;
-                isTargetToPlayer = false;
-                isWalking = false;
-                //hasDestination = false;
-                navMeshAgent.destination = transform.position;
-            }
-        //else
-        //{
-        //    isWalking = false;
-        //    Catch(target);
-        //}
+            isAttacking = false;
+            isTargetToPlayer = false;
+            isWalking = false;
+            navMeshAgent.destination = transform.position;
+        }
     }
 
     void Catch(Transform target)

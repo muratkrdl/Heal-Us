@@ -8,21 +8,29 @@ public class FireBall : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] float lifeTime;
-    [SerializeField] float stunTime;
     [SerializeField] float lerpTime;
     [SerializeField] float manaCost;
-
-    [SerializeField] float damage;
 
     [SerializeField] ParticleSystem[] efects;
     [SerializeField] Light ponitLight;
     [SerializeField] GameObject sphere;
 
-    public float GetDamage
+    int stunTime;
+    float damage;
+
+    public int SetStunTime
     {
-        get
+        set
         {
-            return damage;
+            stunTime = value;
+        }
+    }
+
+    public float SetFireBallDamage
+    {
+        set
+        {
+            damage = value;
         }
     }
 
@@ -101,6 +109,7 @@ public class FireBall : MonoBehaviour
             if(other.TryGetComponent<Monster>(out var monster))
             {
                 monster.MonsterStunned(stunTime,false);
+                MonsterHP.Instance.DecreaseHP(damage * DamageMultiplier.Instance.GetDamageMultiplierValue);
             }
             else if(other.TryGetComponent<StoneMonster>(out var stoneMonster))
             {
