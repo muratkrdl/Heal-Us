@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 5
   slowTime: 1
-  slowAmount: 2
+  slowAmount: 35
   iceFX: {fileID: 8029132437798884974}
   boxCollider: {fileID: 3314259702796985616}
 --- !u!1001 &2540402922405996740

@@ -31,7 +31,7 @@ public class DamageMultiplier : MonoBehaviour
         }
 
         countText.text = villagers.Length.ToString();
-        UpdatText();
+        UpdateText();
     }
 
     public float GetDamageMultiplierValue
@@ -42,7 +42,7 @@ public class DamageMultiplier : MonoBehaviour
         }
     }
 
-    public void UpdatText()
+    public void UpdateText()
     {
         liveCounter = 0;
         foreach (Villager villager in villagers)
@@ -53,6 +53,10 @@ public class DamageMultiplier : MonoBehaviour
         damageMultiplierValue = liveCounter * increaseAmountDamageMultiplierValue;
         liveText.text = liveCounter.ToString();
         deadText.text = (villagers.Length - liveCounter).ToString();
+        if(liveCounter < Mathf.RoundToInt(villagers.Length / 2 - 1))
+        {
+            GameManager.Instance.LoseGame();
+        }
     }
 
 }

@@ -17,6 +17,8 @@ public class MonsterHP : MonoBehaviour
 
     float targetHP;
 
+    Monster monster;
+
     public float GetMaxHP    
     {
         get
@@ -45,9 +47,10 @@ public class MonsterHP : MonoBehaviour
         }
 
         hpSlider.maxValue = maxHP;
-        currentHP = maxHP /2;
+        currentHP = maxHP;
         targetHP = currentHP;
         hpSlider.value = currentHP;
+        monster = GameManager.Instance.GetMonster.GetComponent<Monster>();
     }
 
     public void IncreaseHP(float amount)
@@ -72,7 +75,9 @@ public class MonsterHP : MonoBehaviour
 
             if(currentHP <= 0 + .2f)
             {
-                //Die
+                monster.GetAnimator.SetTrigger("Die");
+                monster.Die();
+                GameManager.Instance.WinGame();
             }
 
             if(Mathf.Abs(currentHP - targetHP) <= .2f)

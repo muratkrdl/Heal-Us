@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using StarterAssets;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    [SerializeField] KeyCode keyCode;
+    [SerializeField] GameObject pauseGamePanel;
+    [SerializeField] Animator fadeImage;
+    [SerializeField] float waitTimeBetweenLoad;
+    [SerializeField] StarterAssetsInputs starterAssetsInputs;
+    [SerializeField] LevelUpPanel levelUpPanel;
 
     [Header("Fireball")]
     [SerializeField] Image fireballBG;
@@ -21,9 +29,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image poisonBG;
     [SerializeField] TextMeshProUGUI poisonCDText;
 
+    [Header("Peoples")]
     [SerializeField] Villager[] villagers;
     [SerializeField] Transform monster;
     [SerializeField] Transform player;
+
+    [SerializeField] FloatingText floatingTextPrefab;
 
     [SerializeField] Image healFillArea;
 
@@ -45,6 +56,32 @@ public class GameManager : MonoBehaviour
         DisablePoisonCDCounter();
         canUseAbility = true;
         healFillArea.fillAmount = 0;
+        if(!fadeImage.gameObject.activeSelf)
+            fadeImage.gameObject.SetActive(true);
+        SetUnFade();
+        if(pauseGamePanel.activeSelf)
+            pauseGamePanel.SetActive(false);
+    }
+
+    void Start() 
+    {
+        starterAssetsInputs.SetCursorState(true);
+    }
+
+    void Update() 
+    {
+        if(Input.GetKeyDown(keyCode))
+        {
+            if(!pauseGamePanel.activeSelf)
+            {
+                PauseGameEvent();
+            }
+            else
+            {
+                ContinueGameButtonEvent();
+                starterAssetsInputs.SetCursorState(true);
+            }
+        }    
     }
 
     public float HealFillAreaFillAmount
@@ -146,18 +183,6 @@ public class GameManager : MonoBehaviour
     }
 #endregion
 
-    public bool CheckGameLose()
-    {
-        foreach (Villager villager in villagers)
-        {
-            if(!villager.GetIsInfected)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public Transform GetNewTarget(Transform target)
     {
         foreach (Villager villager in villagers)
@@ -195,5 +220,85 @@ public class GameManager : MonoBehaviour
             return monster;
         }
     }
+
+    public void SpawnFloatingText(Vector3 pos,string str,Color color)
+    {
+        var text = Instantiate(floatingTextPrefab,pos,Quaternion.identity);
+        text.SetTextValues(str,color);
+    }
+
+#region FadeImageFunc
+    void SetFade()
+    {
+        fadeImage.SetTrigger("Fade");
+    }
+    void SetUnFade()
+    {
+        fadeImage.SetTrigger("UnFade");
+    }
+#endregion
+
+#region WinLose
+    public void WinGame()
+    {
+        StartCoroutine(WinGameRoutine());
+    }
+    IEnumerator WinGameRoutine()
+    {
+        SetFade();
+        yield return new WaitForSeconds(waitTimeBetweenLoad);
+        SceneManager.LoadScene("Win");
+    }
+    public void LoseGame()
+    {
+        StartCoroutine(LoseGameRoutine());
+    }
+    IEnumerator LoseGameRoutine()
+    {
+        SetFade();
+        yield return new WaitForSeconds(waitTimeBetweenLoad);
+        SceneManager.LoadScene("Lose");
+    }
+#endregion
+    
+#region GamePause
+    public void PauseGameEvent()
+    {
+        Time.timeScale = 0;
+        levelUpPanel.IsThinking = true;
+        pauseGamePanel.SetActive(true);
+        starterAssetsInputs.gameObject.GetComponent<FirstPersonController>().StopSFX();
+        starterAssetsInputs.SetCursorState(false);
+    }
+    public void ContinueGameButtonEvent()
+    {
+        Time.timeScale = 1;
+        levelUpPanel.IsThinking = false;
+        pauseGamePanel.SetActive(false);
+        starterAssetsInputs.SetCursorState(true);
+    }
+    public void HomeButtonEvent()
+    {
+        StartCoroutine(HomeButtonRoutine());
+        Time.timeScale = 1;
+    }
+    IEnumerator HomeButtonRoutine()
+    {
+        SetFade();
+        yield return new WaitForSeconds(waitTimeBetweenLoad);
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void QuitButtonEvent()
+    {
+        StartCoroutine(QuitButtonRoutine());
+        Time.timeScale = 1;
+    }
+    IEnumerator QuitButtonRoutine()
+    {
+        SetFade();
+        yield return new WaitForSeconds(waitTimeBetweenLoad);
+        Application.Quit();
+    }
+#endregion
 
 }

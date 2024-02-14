@@ -98,12 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 7899220708886154351}
-  speed: 6000
+  speed: 7500
   lifeTime: 3
-  stunTime: 3
   lerpTime: 7
   manaCost: 150
-  damage: 20
   efects:
   - {fileID: 1026731122042200699}
   ponitLight: {fileID: 599368428315662874}

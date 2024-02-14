@@ -189,6 +189,7 @@ public class Villager : MonoBehaviour
     public void GetDamageFromMonster()
     {
         //Infected and get damage animation
+        DamageMultiplier.Instance.UpdateText();
         StopAllCoroutines();
         ResetTriggerIdle();
         ResetTriggerWalk();
@@ -233,6 +234,7 @@ public class Villager : MonoBehaviour
     {
         infectedVFX.Stop();
         isDead = true;
+        DamageMultiplier.Instance.UpdateText();
         navMeshAgent.destination = transform.position;
         if(Random.Range(0,2) == 0)
         {
@@ -268,5 +270,5 @@ public class Villager : MonoBehaviour
         animator.ResetTrigger("Run");
     }
 #endregion
-    
+
 }

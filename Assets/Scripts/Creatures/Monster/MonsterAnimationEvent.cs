@@ -11,6 +11,11 @@ public class MonsterAnimationEvent : MonoBehaviour
         monster.MeleeAnimationEvent();
     }
 
+    public void PlayerMeleeAnimationEvent()
+    {
+        monster.PlayerMeleeAnimationEvent();
+    }
+
     public void MeleeAnimationFinishEvent()
     {
         monster.MeleeAnimationFinishEvent();

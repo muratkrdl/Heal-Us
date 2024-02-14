@@ -29,10 +29,14 @@ public class AbilityHeal : MonoBehaviour
 
     void Update() 
     {
-        Debug.DrawRay(playerCam.position, transform.TransformDirection(Vector3.forward) * range, Color.red);
         if(Physics.Raycast(playerCam.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, range,layerMask))
         {
-            if(!hit.transform.GetComponent<Villager>().GetIsInfected) { return; }
+            if(!hit.transform.GetComponent<Villager>().GetIsInfected || hit.transform.GetComponent<Villager>().GetIsDead) 
+            {
+                HideVisualArea();
+                StopAllCoroutines();
+                return;
+            }
             if(Input.GetKeyDown(keyCode))
             {
                 fpsAnimator.Heal();
@@ -62,6 +66,7 @@ public class AbilityHeal : MonoBehaviour
             if(villager.GetIsInfected)
             {
                 XPPanel.Instance.IncreaseXP(healGainXPAmount);
+                GameManager.Instance.SpawnFloatingText(villager.transform.position, ("+" + healGainXPAmount).ToString(), Color.cyan);
                 villager.GetHealFromPlayer();
             }
         }

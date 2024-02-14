@@ -47,8 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisonVFX: {fileID: 940921596628611820}
   lifeTime: 1.8
-  manaCost: 150
-  damage: 9
+  manaCost: 250
 --- !u!1001 &1421575887626641763
 PrefabInstance:
   m_ObjectHideFlags: 0

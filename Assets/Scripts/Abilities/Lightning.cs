@@ -47,6 +47,7 @@ public class Lightning : MonoBehaviour
             if(other.TryGetComponent<Monster>(out var monster))
             {
                 boxCollider.enabled = false;
+                GameManager.Instance.SpawnFloatingText(GameManager.Instance.GetMonster.position, damage.ToString(), Color.red);
                 MonsterHP.Instance.DecreaseHP(damage * DamageMultiplier.Instance.GetDamageMultiplierValue);
                 other.GetComponent<Monster>().MonsterStunned(stunTime,true);
             }

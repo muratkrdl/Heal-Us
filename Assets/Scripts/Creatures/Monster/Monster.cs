@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     public NavMeshAgent navMeshAgent;
 
     [SerializeField] Animator animator;
+    [SerializeField] Collider[] colliders;
 
     [SerializeField] ParticleSystem lightningFX;
     [SerializeField] ParticleSystem fireBallStunFX;
@@ -20,7 +21,7 @@ public class Monster : MonoBehaviour
     [SerializeField] MonsterExplosionAbility explosionAbility;
     [SerializeField] MonsterSpawnAbility spawnAbility;
 
-    public Transform target;
+    [HideInInspector] public Transform target;
 
     [HideInInspector] public bool isAttacking;
 
@@ -28,6 +29,15 @@ public class Monster : MonoBehaviour
 
     bool isStunned;
     bool isWalking;
+    bool isDead;
+
+    public Animator GetAnimator
+    {
+        get
+        {
+            return animator;
+        }
+    }
 
     void Start()
     {
@@ -38,6 +48,8 @@ public class Monster : MonoBehaviour
 
     void Update() 
     {
+        if(isDead) { return; }
+
         if(Mathf.Abs(Vector3.Distance(target.transform.position,transform.position)) <= .1f && isWalking)
         {
             isWalking = false;
@@ -115,13 +127,18 @@ public class Monster : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            PlayerHP.Instance.DecreaseHP(meleeDamage);
             Vector3 direction = -(transform.position - other.transform.position).normalized;
             other.GetComponent<FirstPersonController>().Knockback(direction,transform);
+            animator.SetTrigger("PlayerMelee");
+            isAttacking = true;
         }
     }
 
 #region AnimationEvents
+    public void PlayerMeleeAnimationEvent()
+    {
+        PlayerHP.Instance.DecreaseHP(meleeDamage);
+    }
     public void MeleeAnimationEvent()
     {
         if(target.GetComponent<Villager>() != null)
@@ -206,6 +223,18 @@ public class Monster : MonoBehaviour
     void Catch(Transform target)
     {
         navMeshAgent.destination = target.position;
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        StopAllCoroutines();
+        navMeshAgent.destination = transform.position;
+        navMeshAgent.enabled = false;
+        foreach (var item in colliders)
+        {
+            item.enabled = false;
+        }
     }
 
 }

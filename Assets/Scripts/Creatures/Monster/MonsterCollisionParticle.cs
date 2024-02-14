@@ -40,6 +40,7 @@ public class MonsterCollisionParticle : MonoBehaviour
         for (int i = 0; i < poisonDamageCounter; i++)
         {
             MonsterHP.Instance.DecreaseHP(damage * DamageMultiplier.Instance.GetDamageMultiplierValue);
+            GameManager.Instance.SpawnFloatingText(transform.position,damage.ToString(),Color.red);
             yield return new WaitForSeconds(1);
         }
         poisonFX.Stop();

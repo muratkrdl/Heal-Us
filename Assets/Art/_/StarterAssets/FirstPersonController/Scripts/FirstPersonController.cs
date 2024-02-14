@@ -12,6 +12,9 @@ namespace StarterAssets
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
+		[SerializeField] AudioSource walkSFX;
+		[SerializeField] AudioSource runSFX;
+
 		[SerializeField] FPSAnimation fpsAnimator;
 		[SerializeField] LevelUpPanel levelUpPanel;
 
@@ -116,10 +119,43 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			if(levelUpPanel.GetIsThinking) { return; }
+			if(levelUpPanel.IsThinking)
+			{
+				StopSFX();
+				return;
+			}
+
+			if(Mathf.Abs(_input.move.x) > 0 || Mathf.Abs(_input.move.y) > 0)
+			{
+				if(!walkSFX.isPlaying)
+				{
+					if(runSFX.isPlaying && !Stamina.Instance.GetCanSprint)
+					{
+						runSFX.Stop();
+					}
+					walkSFX.Play();
+				}
+				if(Stamina.Instance.GetCanSprint)
+				{
+					if(runSFX.isPlaying) 
+					{ 
+						walkSFX.Stop();
+					}
+					if(!runSFX.isPlaying)
+					{
+						runSFX.Play();
+					}
+				}
+			}
+			else
+			{
+				StopSFX();
+			}
+
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			
 			if(knockbackCounter <= 0)
 			{
 				inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -146,9 +182,29 @@ namespace StarterAssets
 			}
 		}
 
+		public void StopSFX()
+		{
+			if(walkSFX.isPlaying)
+			{
+				walkSFX.Stop();
+			}
+			if(runSFX.isPlaying)
+			{
+				runSFX.Stop();
+			}
+		}
+
+		void OnTriggerEnter(Collider other) 
+		{
+			if(other.CompareTag("Exit"))
+			{
+				GameManager.Instance.LoseGame();
+			}
+		}
+
 		private void LateUpdate()
 		{
-			if(levelUpPanel.GetIsThinking) { return; }
+			if(levelUpPanel.IsThinking) { return; }
 			CameraRotation();
 		}
 
@@ -332,4 +388,5 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 	}
+
 }

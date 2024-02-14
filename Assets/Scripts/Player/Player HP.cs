@@ -48,7 +48,7 @@ public class PlayerHP : MonoBehaviour
         }
 
         hpSlider.maxValue = maxHP;
-        currentHP = maxHP /2;
+        currentHP = maxHP;
         targetHP = currentHP;
         hpSlider.value = currentHP;
     }

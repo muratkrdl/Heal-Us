@@ -70,11 +70,15 @@ public class LevelUpPanel : MonoBehaviour
 
     bool isThinking;
 
-    public bool GetIsThinking
+    public bool IsThinking
     {
         get
         {
             return isThinking;
+        }
+        set
+        {
+            isThinking = value;
         }
     }
 

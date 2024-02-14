@@ -15,8 +15,8 @@ public class Mana : MonoBehaviour
     [SerializeField] float lerpTime;
 
     float currentMana;
-
     float targetMana;
+    float previousMana;
 
     bool isChanging;
 
@@ -52,7 +52,7 @@ public class Mana : MonoBehaviour
         }
 
         manaSlider.maxValue = maxMana;
-        currentMana = maxMana * 2 / 3;
+        currentMana = maxMana;
         targetMana = currentMana;
         manaSlider.value = currentMana;
     }
@@ -65,6 +65,8 @@ public class Mana : MonoBehaviour
 
     public void IncreaseMana(float amount)
     {
+        previousMana = currentMana - amount;
+        if(previousMana < 0) { return; }
         isChanging = true;
         StartCoroutine(SmoothManaVisual(amount));
     }

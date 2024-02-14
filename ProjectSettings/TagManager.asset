@@ -9,6 +9,10 @@ TagManager:
   - Village
   - Ball
   - Mana Pickup
+  - Gate
+  - Lever
+  - Key
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -29,7 +33,7 @@ TagManager:
   - 
   - Obstacle
   - 
-  - 
+  - Interact
   - 
   - 
   - 
