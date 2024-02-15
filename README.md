@@ -18,24 +18,41 @@ Come on, you need villagers, otherwise who will you buy pot from?
 
 # Skills
 
-#### Fireball
+## Fireball
+
+#### The fireball stunned for a long period of time and deals damage
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Fireball.gif" width="auto">
 
-#### Lightning
+## Lightning You can use lightning from any distance you want.
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Lightning.gif" width="auto">
 
-#### Poison
+## Poison poison deals damage over time
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Poison.gif" width="auto">
 
-#### Ice Potion
+## Ice Potion
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Ice%20Poison.gif" width="auto">
 
 
 # Pickups
+
+#### You can strengthen yourself by choosing a feature from the panel that appears every time you level up.
+
+#### You must heal villagers to gain experience
+
+#### If recovered villagers get sick again, they begin to die faster than before.
+
+<img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Level%20Up.gif" width="auto">
+
+
+# Pickups
+
+## You can increase your health, energy and mana by using potions.
+
+## You can carry maximum three potion for each one
 
 #### Hp Potion
 
@@ -56,6 +73,8 @@ Come on, you need villagers, otherwise who will you buy pot from?
 
 # Doctor Skills(!)
 
+## Doctor uses ability when damaged by fireball or lightning
+
 #### Summon Stone Monsters
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Summon%20Stone%20Monster.gif" width="auto">
@@ -65,7 +84,7 @@ Come on, you need villagers, otherwise who will you buy pot from?
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Explosion.gif" width="auto">
 
 
-# Some Photo From Game
+# Some Photos From Game
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Photos/Picture1.png" width="auto">
 
