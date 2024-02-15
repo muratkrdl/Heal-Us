@@ -1,8 +1,14 @@
 # Heal-Us
 
-This game is a classic tower defense game
+Someone claiming to be a doctor wants to make the villagers sick. 
 
-If we destroy 12 waves of enemies we win the game
+You warned them, but they realized the danger too late. 
+
+Now someone must stop the fake doctor and save the villagers.
+
+Would you like this person to be you?
+
+Come on, you need villagers, otherwise who will you buy pot from?
 
 
 # How To Play
