@@ -24,20 +24,26 @@ Come on, you need villagers, otherwise who will you buy pot from?
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Fireball.gif" width="auto">
 
-## Lightning You can use lightning from any distance you want.
+## Lightning 
+
+##### You can use lightning from any distance you want.
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Lightning.gif" width="auto">
 
-## Poison poison deals damage over time
+## Poison 
+ 
+#### Poison deals damage over time
 
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Poison.gif" width="auto">
 
 ## Ice Potion
 
+#### It slows down units trying to pass over it. including villagers
+
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Ice%20Poison.gif" width="auto">
 
 
-# Pickups
+# Level Up
 
 #### You can strengthen yourself by choosing a feature from the panel that appears every time you level up.
 
