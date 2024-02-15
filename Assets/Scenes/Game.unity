@@ -24603,6 +24603,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSPLAYER
       objectReference: {fileID: 0}
+    - target: {fileID: 8248248518578185309, guid: 5100fa12c7d654041890309a1f6d49ee,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -91847,6 +91852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e276571fe84d52e4e90f1edbe21ebff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstPersonController: {fileID: 0}
   hpSlider: {fileID: 1532014763}
   maxHP: 100
   lerpTime: 20

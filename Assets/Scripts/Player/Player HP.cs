@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHP : MonoBehaviour
 {
     public static PlayerHP Instance { get; private set; }
+
+    [SerializeField] FirstPersonController firstPersonController;
 
     [SerializeField] Slider hpSlider;
 
@@ -76,6 +79,8 @@ public class PlayerHP : MonoBehaviour
             if(currentHP <= 0 + .2f)
             {
                 //Die
+                firstPersonController.enabled = false;
+                GameManager.Instance.LoseGame();
             }
 
             if(Mathf.Abs(currentHP - targetHP) <= .02f)
