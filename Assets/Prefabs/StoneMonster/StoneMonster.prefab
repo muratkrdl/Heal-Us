@@ -205,7 +205,7 @@ MonoBehaviour:
   dieFX: {fileID: 493815672934944515}
   myRenderer: {fileID: 8008542258268073912}
   boxCollider: {fileID: 6929389130608030142}
-  damage: 10
+  damage: 15
   minLifeTime: 6
   maxLifeTime: 14
 --- !u!1 &4606795915497047867

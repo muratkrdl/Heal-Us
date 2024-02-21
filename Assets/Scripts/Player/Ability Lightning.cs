@@ -62,8 +62,8 @@ public class AbilityLightning : MonoBehaviour
 
     IEnumerator UseLightning()
     {
-        canUseLightning = false;
         Mana.Instance.DecreaseMana(lightningPrefab.GetComponent<Lightning>().GetManaCost);
+        canUseLightning = false;
 
         RaycastForMousePos();
 

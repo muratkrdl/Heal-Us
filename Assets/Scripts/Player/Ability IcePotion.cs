@@ -42,6 +42,7 @@ public class AbilityIcePotion : MonoBehaviour
         SoundManager.Instance.PlaySound3D("Break Glass",transform.position);
         Instantiate(IceFX,transform.position,Quaternion.identity);
         IceFX.GetComponent<Ice>().SetSlowAmount = slowAmount;
+        IceFX.GetComponent<Ice>().SetPercentSlowAmount();
         Destroy(gameObject,.1f);
     }
 

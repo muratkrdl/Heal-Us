@@ -40,6 +40,14 @@ public class GameManager : MonoBehaviour
 
     bool canUseAbility;
 
+    public float GetVillagerSpeed
+    {
+        get
+        {
+            return villagers[0].navMeshAgent.speed;
+        }
+    }
+
     void Awake() 
     {
         if(Instance == null)
@@ -72,6 +80,7 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(keyCode))
         {
+            if(levelUpPanel.gameObject.activeSelf) { return; }
             if(!pauseGamePanel.activeSelf)
             {
                 PauseGameEvent();
@@ -201,9 +210,9 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                float a = Mathf.Abs(Vector3.Distance(villager.transform.position, monster.transform.position));
+                float a = Mathf.Abs(Vector3.Distance(villager.transform.position, monster.position));
                 float b = Mathf.Abs(Vector3.Distance(target.position, monster.position));
-                if(target.GetComponent<Villager>() != null && target.GetComponent<Villager>().GetIsInfected) { b = Mathf.Infinity; }
+                if(target.GetComponent<Villager>() != null && target.GetComponent<Villager>().GetIsInfected || target == player) { b = Mathf.Infinity; }
                 if(a < b) 
                 {
                     target = villager.transform;
@@ -317,6 +326,7 @@ public class GameManager : MonoBehaviour
             item.StopRunSFX();
             item.StopWalkSFX();
         }
+        monster.GetComponent<Monster>().StopWalkSFX();
     }
 
 }

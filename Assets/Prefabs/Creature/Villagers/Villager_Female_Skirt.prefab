@@ -1264,11 +1264,12 @@ MonoBehaviour:
   walkSFX: {fileID: 1742782195512778612}
   runSFX: {fileID: 4096526039869744646}
   animator: {fileID: 2344051616407096314}
-  areaSize: {x: 300, y: 300}
+  areaSize: {x: 250, y: 360}
   healVFX: {fileID: 5048735413549063990}
   infectedVFX: {fileID: 8383337413637289778}
   maxViewDistance: 6.9
   lifeTime: 45
+  decreaseLifeTimeAmount: 0.75
   minWaitTime: 7.5
   maxWaitTime: 12.5
   newPosMinDistance: 5.5

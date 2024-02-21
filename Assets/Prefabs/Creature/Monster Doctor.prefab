@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 175926620977767748}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6298288731983728228}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1599981176253112891}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8307408057166923605}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8105126868536539610}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.65, y: 2, z: 0.65}
+  m_Size: {x: 0.655, y: 2, z: 0.55}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &4499987695577152962
 BoxCollider:
@@ -246,7 +246,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9, y: 2, z: 0.9}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3326984298414601622
 Rigidbody:
@@ -288,8 +288,8 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 240
-  m_StoppingDistance: 1.2
+  m_AngularSpeed: 360
+  m_StoppingDistance: 1.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poisonFX: {fileID: 3567434577588205500}
   poisonDamageCounter: 5
-  poisonDamageDecreaseComplierAmount: 10
+  poisonDamageDecreaseComplierAmount: 4
 --- !u!114 &6653392923207166095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,13 +428,15 @@ MonoBehaviour:
   - {fileID: 4499987695577152962}
   lightningFX: {fileID: 5498385471689220520}
   fireBallStunFX: {fileID: 6195094373999835764}
-  meleeDamage: 35
-  maxDistanceForPlayer: 10
+  meleeDamage: 20
+  maxDistanceForPlayer: 12
+  haveChasedPlayerDistance: 9
+  chasePlayerTime: 7
+  haveChasedPlayerTimer: 5
   explosionAbility: {fileID: 5957684416746118613}
   spawnAbility: {fileID: 63528893487791026}
   target: {fileID: 0}
   isAttacking: 0
-  isTargetToPlayer: 0
 --- !u!114 &5957684416746118613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5639413097708026369}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3491060866113968929}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4089097348778837479}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2728624808984525940}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Large_Shield_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +605,7 @@ GameObject:
   - component: {fileID: 3166853228354064220}
   - component: {fileID: 783552182839199382}
   - component: {fileID: 3257056608460731503}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4526059945517935838}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8585727518339831023}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +734,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7193839852021668961}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -764,7 +766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1889430139863251198}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandPinky3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3398851550877485347}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,7 +829,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7345042302419291682}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -859,7 +861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 198324563067350931}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Left_Hand_Weapon_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +894,7 @@ GameObject:
   - component: {fileID: 6518458995179357740}
   - component: {fileID: 6195094373999835764}
   - component: {fileID: 8315140217428183902}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stunned
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5724,7 +5726,7 @@ GameObject:
   - component: {fileID: 1025798079402677186}
   - component: {fileID: 2231086799043298116}
   - component: {fileID: 1456310482938250988}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10620,7 +10622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4255929085854364949}
   - component: {fileID: 6900712430790677515}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Plague_Doctor_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10767,7 +10769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 163392541559710097}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Quiver_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10798,7 +10800,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6134657878219710771}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandIndex2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10830,7 +10832,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 451062539763942784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10861,7 +10863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4903421289082409159}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10894,7 +10896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 179909691438322963}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Right_Hand_Weapon_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10927,7 +10929,7 @@ GameObject:
   - component: {fileID: 2721083389668624799}
   - component: {fileID: 3567434577588205500}
   - component: {fileID: 6358921668496503288}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Poison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15764,7 +15766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3868440296845675321}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightShoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15796,7 +15798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6590797475078279289}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15828,7 +15830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 352309833870995076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15862,7 +15864,7 @@ GameObject:
   - component: {fileID: 8731354191778174168}
   - component: {fileID: 5047624069872011404}
   - component: {fileID: 421337672677836950}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20699,7 +20701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1363497752855951009}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Long_Bow_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20730,7 +20732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8919796890011452848}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandIndex3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20761,7 +20763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8331289425593068261}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftToe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20792,7 +20794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5271914060046328351}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20826,7 +20828,7 @@ GameObject:
   - component: {fileID: 3374816463573514853}
   - component: {fileID: 5498385471689220520}
   - component: {fileID: 7993042261520744828}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Lightning aura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25665,7 +25667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 734579483178742106}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25697,7 +25699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3821451642410098024}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25729,7 +25731,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8219086177305392652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25761,7 +25763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1884746229263905165}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightFoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25793,7 +25795,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7790264165180592265}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightUpLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25828,7 +25830,7 @@ GameObject:
   - component: {fileID: 8220848763483879121}
   - component: {fileID: 22553788392269824}
   - component: {fileID: 5886236843506464033}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30665,7 +30667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5376280003783295867}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30697,7 +30699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341765933847893194}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30729,7 +30731,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8257356162190569655}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_HeadTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30760,7 +30762,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4993973968447738510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30791,7 +30793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2904937220646748987}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandIndex1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30823,7 +30825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3039694637069314435}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandPinky1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30855,7 +30857,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 997517618921401993}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandThumb3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30886,7 +30888,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 583712957367744209}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandMiddle1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30918,7 +30920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1383933383992971536}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftForeArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30954,7 +30956,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765853821513236324}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandThumb2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30986,7 +30988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4680969777828665138}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31058,7 +31060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5764447689298840945}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandMiddle2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31090,7 +31092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5545610118834433440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandPinky2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31122,7 +31124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2148944793187927154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Medium_Shield_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31153,7 +31155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1396675559014818267}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31185,7 +31187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8864225790270770971}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Medium_Bow_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31216,7 +31218,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2785692020527029268}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_NPC_Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31250,7 +31252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5752048814648830443}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31282,7 +31284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4918961220746466564}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Sheat_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31313,7 +31315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3906288319022358390}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandRing3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31344,7 +31346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5360343299886008638}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Small_Shield_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31375,7 +31377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5492447102603875289}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightToe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31406,7 +31408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7151003666553776599}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31438,7 +31440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7862907470374462414}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Second_Weapon_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31500,7 +31502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1911305115337566854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandRing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31534,7 +31536,7 @@ GameObject:
   - component: {fileID: 388708961051481780}
   - component: {fileID: 5047987757050008983}
   - component: {fileID: 251972972985601912}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36372,7 +36374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2689996864723056137}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandRing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36404,7 +36406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7116800089309099265}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_Spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36441,7 +36443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3491366488151445800}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandMiddle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36472,7 +36474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737290840200031329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_RightHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36504,7 +36506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4318396682048045187}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PT_LeftHandThumb1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

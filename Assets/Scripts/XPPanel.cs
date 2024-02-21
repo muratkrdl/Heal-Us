@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ public class XPPanel : MonoBehaviour
     [SerializeField] float lerpTime;
 
     [SerializeField] float increaseAmountMaxXP;
+
+    [SerializeField] StarterAssetsInputs starterAssetsInputs;
 
     float currentXP;
 
@@ -55,6 +58,24 @@ public class XPPanel : MonoBehaviour
         currentXP = 0;
         targetXP = currentXP;
         xpSlider.value = currentXP;
+    }
+
+    void Update() 
+    {
+        if(levelUpPanel.GetComponent<LevelUpPanel>().IsThinking)
+        {
+            if(Time.timeScale != 0)
+                Time.timeScale = 0;
+            if(Cursor.lockState == CursorLockMode.Locked)
+                starterAssetsInputs.SetCursorState(false);
+        }
+        else
+        {
+            if(Time.timeScale != 1)
+                Time.timeScale = 1;
+            if(Cursor.lockState == CursorLockMode.None)
+                starterAssetsInputs.SetCursorState(true);
+        }
     }
 
     public void IncreaseXP(float amount)

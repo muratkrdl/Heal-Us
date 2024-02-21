@@ -40,7 +40,7 @@ public class Mana : MonoBehaviour
         }
     }
 
-    void Awake() 
+    void Awake()
     {
         if(Instance == null)
         {
@@ -50,7 +50,10 @@ public class Mana : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    void Start() 
+    {
         manaSlider.maxValue = maxMana;
         currentMana = maxMana;
         targetMana = currentMana;
@@ -60,6 +63,10 @@ public class Mana : MonoBehaviour
     void Update() 
     {
         if(currentMana >= maxMana || isChanging) { return; }
+        if(currentMana < 0) 
+        {
+            currentMana = 0;
+        }
         IncreaseManaWithTime();
     }
 
@@ -80,6 +87,7 @@ public class Mana : MonoBehaviour
 
     void IncreaseManaWithTime()
     {
+        if(currentMana >= maxMana || isChanging) { return; }
         currentMana += Time.deltaTime * increaseSpeed;
         Mathf.RoundToInt(currentMana);
         manaSlider.value = currentMana;
@@ -91,6 +99,7 @@ public class Mana : MonoBehaviour
 
     IEnumerator SmoothManaVisual(float amount)
     {
+        targetMana = currentMana;
         targetMana += amount;
         while(true)
         {

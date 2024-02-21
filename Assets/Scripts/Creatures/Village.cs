@@ -20,12 +20,15 @@ public class Villager : MonoBehaviour
 
     [SerializeField] float maxViewDistance;
     [SerializeField] float lifeTime;
+    [SerializeField] float decreaseLifeTimeAmount;
 
     [SerializeField] float minWaitTime;
     [SerializeField] float maxWaitTime;
 
     [SerializeField] float newPosMinDistance;
     [SerializeField] float newPosMaxDistance;
+
+    float initialSpeed;
 
     Vector3 newRandomPos;
     Vector3 direction;
@@ -63,6 +66,7 @@ public class Villager : MonoBehaviour
     {
         target = GameManager.Instance.GetMonster;
         newRandomPos = transform.position;
+        initialSpeed = navMeshAgent.speed;
     }
 
     void Update() 
@@ -193,7 +197,9 @@ public class Villager : MonoBehaviour
     {
         StopAllCoroutines();
         SoundManager.Instance.PlaySound3D("Heal",transform.position);
-        lifeTime *= 3/4;
+        animator.speed = 1;
+        navMeshAgent.speed = initialSpeed;
+        lifeTime *= decreaseLifeTimeAmount;
         isWaiting = false;
         isWalking = false;
         isRunning = false;
@@ -207,6 +213,8 @@ public class Villager : MonoBehaviour
     {
         DamageMultiplier.Instance.UpdateText();
         SoundManager.Instance.PlaySound3D("Infect",transform.position);
+        animator.speed = .5f;
+        navMeshAgent.speed = initialSpeed / 2;
         StopRunSFX();
         StopWalkSFX();
         StopAllCoroutines();
@@ -225,10 +233,11 @@ public class Villager : MonoBehaviour
 
     IEnumerator CheckWalkingCharacter()
     {
-        Vector3 checkPos = Vector3.zero;
+        _ = Vector3.zero;
         while (true)
         {
-            checkPos = transform.position;
+            Vector3 checkPos = transform.position;
+
             yield return new WaitForSeconds(.1f);
             if(checkPos == transform.position)
             {
@@ -256,7 +265,9 @@ public class Villager : MonoBehaviour
         infectedVFX.Stop();
         isDead = true;
         DamageMultiplier.Instance.UpdateText();
+        StopAllCoroutines();
         navMeshAgent.destination = transform.position;
+        ResetTriggerIdle();
         if(Random.Range(0,2) == 0)
         {
             animator.SetTrigger("Die1");
@@ -271,7 +282,6 @@ public class Villager : MonoBehaviour
             item.enabled = false;
         }
         GetComponent<Rigidbody>().isKinematic = true;
-        StopAllCoroutines();
         enabled = false;
     }
 
@@ -306,5 +316,11 @@ public class Villager : MonoBehaviour
         animator.ResetTrigger("Run");
     }
 #endregion
+
+    public void SetAnimatorSpeed(float value)
+    {
+        if(isInfected) { return; }
+        animator.speed = value;
+    }
 
 }

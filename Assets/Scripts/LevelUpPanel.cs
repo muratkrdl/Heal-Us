@@ -93,15 +93,6 @@ public class LevelUpPanel : MonoBehaviour
         isThinking = true;
         UpdateAllTextValues();
         CallLevelUpPanel();
-        Time.timeScale = 0;
-        starterAssetsInputs.SetCursorState(false);
-    }
-
-    void OnDisable() 
-    {
-        isThinking = false;
-        Time.timeScale = 1;
-        starterAssetsInputs.SetCursorState(true);
     }
 
     void CallLevelUpPanel()
@@ -162,21 +153,18 @@ public class LevelUpPanel : MonoBehaviour
     {
         playerHP.MaxHP = playerHP.MaxHP + increaseAmountMaxHP;
         playerHP.UpdateValue();
-        indexPanel.UpdateMaxValues();
         PushButton();
     }
     public void LevelUPMana()
     {
         playerMana.MaxMana = playerMana.MaxMana + increaseAmountMaxMana;
         playerMana.UpdateValue();
-        indexPanel.UpdateMaxValues();
         PushButton();
     }
     public void LevelUPStamina()
     {
         playerStamina.MaxStamina = playerStamina.MaxStamina + increaseAmountMaxStamina;
         playerStamina.UpdateValue();
-        indexPanel.UpdateMaxValues();
         playerStamina.LevelUpMaxStamina();
         PushButton();
     }
@@ -189,6 +177,7 @@ public class LevelUpPanel : MonoBehaviour
 
     void PushButton()
     {
+        isThinking = false;
         gameObject.SetActive(false);
     }
 

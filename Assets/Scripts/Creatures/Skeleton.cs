@@ -60,6 +60,7 @@ public class Skeleton : MonoBehaviour
     {
         GetComponent<Rigidbody>().useGravity = true;
         yield return new WaitForSeconds(lifeTime);
+        animator.SetTrigger("Die");
         KYS();
     }
 
@@ -68,7 +69,6 @@ public class Skeleton : MonoBehaviour
         isDead = true;
         canWalk = false;
         navMeshAgent.enabled = false;
-        animator.SetTrigger("Die");
     }
 
 }

@@ -19,19 +19,22 @@ public class Monster : MonoBehaviour
     [SerializeField] float meleeDamage;
 
     [SerializeField] float maxDistanceForPlayer;
+    [SerializeField] float haveChasedPlayerDistance;
+    [SerializeField] float chasePlayerTime;
+    [SerializeField] float haveChasedPlayerTimer;
 
     [SerializeField] MonsterExplosionAbility explosionAbility;
     [SerializeField] MonsterSpawnAbility spawnAbility;
 
-    [HideInInspector] public Transform target;
+    public Transform target;
 
     [HideInInspector] public bool isAttacking;
 
-    [HideInInspector] public bool isTargetToPlayer;
-
+    bool isTargetToPlayer;
     bool isStunned;
     bool isWalking;
     bool isDead;
+    bool haveChasedPlayer;
 
     public Animator GetAnimator
     {
@@ -54,6 +57,7 @@ public class Monster : MonoBehaviour
 
         if(Mathf.Abs(Vector3.Distance(target.transform.position,transform.position)) <= .1f && isWalking)
         {
+            if(target == GameManager.Instance.GetPlayer) { return; }
             isWalking = false;
             animator.SetTrigger("Idle");
             target = GameManager.Instance.GetNewTarget(target);
@@ -62,25 +66,44 @@ public class Monster : MonoBehaviour
         {
             Catch(target);
         }
-
         if(isStunned) { navMeshAgent.destination = transform.position; return; }
 
         GetDestination(target);
 
         if(Mathf.Abs(Vector3.Distance(transform.position,GameManager.Instance.GetPlayer.position)) <= maxDistanceForPlayer) 
         {
-            if(isTargetToPlayer) { return; }
+            if(isTargetToPlayer || haveChasedPlayer) { return; }
 
             isTargetToPlayer = true;
             target = GameManager.Instance.GetPlayer;
+            StartCoroutine(CheckPlayerDistance());
         }
-        else if(Mathf.Abs(Vector3.Distance(transform.position,GameManager.Instance.GetPlayer.position)) > maxDistanceForPlayer)
+        else if(Mathf.Abs(Vector3.Distance(transform.position,GameManager.Instance.GetPlayer.position)) > maxDistanceForPlayer + 3)
         {
-            if(!isTargetToPlayer) { return; }
+            if(!isTargetToPlayer || !haveChasedPlayer) { return; }
 
             isTargetToPlayer = false;
             target = GameManager.Instance.GetNewTarget(target);
+            StopCoroutine(CheckPlayerDistance());
         }
+    }
+
+    IEnumerator CheckPlayerDistance()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(chasePlayerTime);
+            if(Mathf.Abs(Vector3.Distance(transform.position,GameManager.Instance.GetPlayer.position)) > haveChasedPlayerDistance)
+            {
+                haveChasedPlayer = true;
+                isTargetToPlayer = false;
+                target = GameManager.Instance.GetNewTarget(target);
+                yield return new WaitForSeconds(haveChasedPlayerTimer);
+                haveChasedPlayer = false;
+                break;
+            }
+        }
+        StopCoroutine(CheckPlayerDistance());
     }
 
     public void MonsterStunned(float time,bool isLightning)
@@ -131,15 +154,14 @@ public class Monster : MonoBehaviour
         {
             Vector3 direction = -(transform.position - other.transform.position).normalized;
             other.GetComponent<FirstPersonController>().Knockback(direction,transform);
-            animator.SetTrigger("PlayerMelee");
-            isAttacking = true;
         }
     }
 
 #region AnimationEvents
     public void PlayerMeleeAnimationEvent()
     {
-        PlayerHP.Instance.DecreaseHP(meleeDamage);
+        if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) < 2.5f)
+            PlayerHP.Instance.DecreaseHP(meleeDamage);
     }
     public void MeleeAnimationEvent()
     {
@@ -148,35 +170,23 @@ public class Monster : MonoBehaviour
             target.GetComponent<Villager>().GetDamageFromMonster();
             target = GameManager.Instance.GetNewTarget(target);
         }
-        else if(target.GetComponent<FirstPersonController>() != null)   
-        {
-            PlayerHP.Instance.DecreaseHP(meleeDamage);
-        }
         navMeshAgent.destination = transform.position;
         isWalking = false;
-        //hasDestination = false;
     }
     public void MeleeAnimationFinishEvent()
     {
         isAttacking = false;
         isTargetToPlayer = false;
         isWalking = false;
-        //hasDestination = false;
         navMeshAgent.destination = transform.position;
-        target = GameManager.Instance.GetNewTarget(target);
-        //if(target.CompareTag("Village")) { return; }
-        //if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) <= 1.85f)
-        //{
-        //    hasDestination = true;
-        //    isWalking = true;
-        //    isTargetToPlayer = true;
-        //    isAttacking = false;
-        //}
     }
     public void WalkAnimationEvent()
     {
         if(isAttacking) { isAttacking = false; }
-        target = GameManager.Instance.GetNewTarget(target);
+        if(!isTargetToPlayer)
+        {
+            target = GameManager.Instance.GetNewTarget(target);
+        }
     }
     public void IdleAnimationEvent()
     {
@@ -206,7 +216,7 @@ public class Monster : MonoBehaviour
             }
             animator.SetTrigger("Walk");
         }
-        if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) <= 1.4f)
+        if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) <= 1.5f)
         {
             //bite and bite animation
             if(isAttacking) { return; }
@@ -214,9 +224,14 @@ public class Monster : MonoBehaviour
             StopWalkSFX();
             isWalking = false;
             isAttacking = true;
+            if(target == GameManager.Instance.GetPlayer)
+            {
+                animator.SetTrigger("PlayerMelee");
+                return;
+            }
             animator.SetTrigger("Melee");
         }
-        else if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) > 1.75f)
+        else if(Mathf.Abs(Vector3.Distance(transform.position,target.position)) > 3f)
         {
             if(!isAttacking) { return; }
 
@@ -246,12 +261,17 @@ public class Monster : MonoBehaviour
         }
     }
 
-    void StopWalkSFX()
+    public void StopWalkSFX()
     {
         if(walkSFX.isPlaying)
         {
             walkSFX.Stop();
         }
+    }
+
+    public void SetAnimatorSpeed(float value)
+    {
+        animator.speed = value;
     }
 
 }

@@ -10,6 +10,8 @@ public class PlayerHP : MonoBehaviour
 
     [SerializeField] FirstPersonController firstPersonController;
 
+    [SerializeField] Animator[] dieAnimator;
+
     [SerializeField] Slider hpSlider;
 
     [SerializeField] float maxHP;
@@ -18,6 +20,8 @@ public class PlayerHP : MonoBehaviour
     float currentHP;
 
     float targetHP;
+
+    bool playerDead;
 
     public float MaxHP
     {
@@ -49,7 +53,11 @@ public class PlayerHP : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    void Start() 
+    {
+        playerDead = false;
         hpSlider.maxValue = maxHP;
         currentHP = maxHP;
         targetHP = currentHP;
@@ -69,7 +77,7 @@ public class PlayerHP : MonoBehaviour
     IEnumerator SmoothHPVisual(float amount,bool increase)
     {
         targetHP += amount;
-        while(true)
+        while(!playerDead)
         {
             yield return null;
             if(amount > 0 && currentHP >= maxHP) { currentHP = maxHP; targetHP = currentHP; } 
@@ -79,6 +87,9 @@ public class PlayerHP : MonoBehaviour
             if(currentHP <= 0 + .2f)
             {
                 //Die
+                playerDead = true;
+                SoundManager.Instance.PlaySound3D("Die",GameManager.Instance.GetPlayer.position);
+                DieAnimation();
                 firstPersonController.enabled = false;
                 GameManager.Instance.LoseGame();
             }
@@ -86,6 +97,7 @@ public class PlayerHP : MonoBehaviour
             if(Mathf.Abs(currentHP - targetHP) <= .02f)
             {
                 if(increase) { currentHP += 1; }
+                currentHP = targetHP;
                 Mathf.RoundToInt(currentHP);
                 hpSlider.value = currentHP;
                 break;
@@ -97,6 +109,16 @@ public class PlayerHP : MonoBehaviour
     public void UpdateValue()
     {
         hpSlider.maxValue = maxHP;
+    }
+
+    void DieAnimation()
+    {
+        foreach (var item in dieAnimator)
+        {
+            if(!item.enabled)
+                item.enabled = true;
+            item.SetTrigger("Die");
+        }
     }
 
 }

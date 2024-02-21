@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3314259702796985616}
   - component: {fileID: 1006458580609927517}
   - component: {fileID: -7360939753194130047}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Ice FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,6 +181,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowMagicFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 260265405304436542, guid: 55ab2fe05e789594e892b3e45ba25994,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3966841639361994869, guid: 55ab2fe05e789594e892b3e45ba25994,
         type: 3}

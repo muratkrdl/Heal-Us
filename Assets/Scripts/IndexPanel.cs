@@ -8,22 +8,18 @@ public class IndexPanel : MonoBehaviour
 {
     [Header("HP")]
     [SerializeField] Slider hpSlider;
-    [SerializeField] TextMeshProUGUI currentHPText;
-    [SerializeField] TextMeshProUGUI maxHPText;
+    [SerializeField] TextMeshProUGUI hpIndexText;
 
     [Header("Mana")]
     [SerializeField] Slider manaSlider;
-    [SerializeField] TextMeshProUGUI currentManaText;
-    [SerializeField] TextMeshProUGUI maxManaText;
+    [SerializeField] TextMeshProUGUI manaIndexText;
 
     [Header("Stamina")]
     [SerializeField] Slider staminaSlider;
-    [SerializeField] TextMeshProUGUI currentStaminaText;
-    [SerializeField] TextMeshProUGUI maxStaminaText;
+    [SerializeField] TextMeshProUGUI staminaIndexText;
 
     void Start() 
     {
-        UpdateMaxValues();   
         StartCoroutine(UpdateCurrentValues());
     }
 
@@ -32,21 +28,12 @@ public class IndexPanel : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(.1f);
-            currentHPText.text = ((int)hpSlider.value).ToString();
+            hpIndexText.text = ((int)hpSlider.value).ToString() + " / " + hpSlider.maxValue.ToString();
 
-            currentManaText.text = Mathf.RoundToInt(manaSlider.value).ToString();
+            manaIndexText.text = Mathf.RoundToInt(manaSlider.value).ToString() + " / " + manaSlider.maxValue.ToString();
 
-            currentStaminaText.text = ((int)staminaSlider.value).ToString();
+            staminaIndexText.text = ((int)staminaSlider.value).ToString() + " / " + staminaSlider.maxValue.ToString();
         }
-    } 
-
-    public void UpdateMaxValues()
-    {
-        maxHPText.text = hpSlider.maxValue.ToString();
-
-        maxManaText.text = manaSlider.maxValue.ToString();
-
-        maxStaminaText.text = staminaSlider.maxValue.ToString();
     }
 
 }

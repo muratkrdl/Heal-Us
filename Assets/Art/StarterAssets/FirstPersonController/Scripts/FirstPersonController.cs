@@ -252,7 +252,7 @@ namespace StarterAssets
 
 		public void Knockback(Vector3 direction,Transform other)
 		{
-			if(other.CompareTag("Village")) 
+			if(other.CompareTag("Village"))
 			{ 
 				currentForce = villagerKnockbackForce; 
 				currentTime = villagerKnockbackTime; 
