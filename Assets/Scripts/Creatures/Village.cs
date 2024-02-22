@@ -255,6 +255,8 @@ public class Villager : MonoBehaviour
     IEnumerator StartDieTimer()
     {
         yield return new WaitForSeconds(lifeTime);
+        isDead = true;
+        yield return new WaitForSeconds(.1f);
         SetAnimatorSpeed(1);
         Die();
     }
@@ -264,7 +266,6 @@ public class Villager : MonoBehaviour
         StopWalkSFX();
         StopRunSFX();
         infectedVFX.Stop();
-        isDead = true;
         DamageMultiplier.Instance.UpdateText();
         StopAllCoroutines();
         navMeshAgent.destination = transform.position;
@@ -278,10 +279,6 @@ public class Villager : MonoBehaviour
             animator.SetTrigger("Die2");
         }
         navMeshAgent.enabled = false;
-    }
-
-    public void DisableCollider()
-    {
         foreach (var item in GetComponents<BoxCollider>())
         {
             item.enabled = false;

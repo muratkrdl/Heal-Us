@@ -13,11 +13,6 @@ public class Ice : MonoBehaviour
     [SerializeField] ParticleSystem iceFX;
     [SerializeField] BoxCollider boxCollider;
 
-    float playerSpeed;
-    float playerSprintSpeed;
-    float villagerSpeed;
-    float doctorSpeed;
-
     public int SetSlowAmount
     {
         set
@@ -32,10 +27,6 @@ public class Ice : MonoBehaviour
     {
         StartCoroutine(KYS());
         SetPercentSlowAmount();
-        doctorSpeed = GameManager.Instance.GetMonster.GetComponent<Monster>().navMeshAgent.speed;
-        villagerSpeed = GameManager.Instance.GetVillagerSpeed;
-        playerSpeed = GameManager.Instance.GetPlayer.GetComponent<FirstPersonController>().MoveSpeed;
-        playerSprintSpeed = GameManager.Instance.GetPlayer.GetComponent<FirstPersonController>().SprintSpeed;
     }
 
     void OnTriggerEnter(Collider other) 
@@ -44,8 +35,8 @@ public class Ice : MonoBehaviour
         {
             if(other.TryGetComponent<FirstPersonController>(out var player))
             {
-                player.MoveSpeed = playerSpeed / slowAmountPercent;
-                player.SprintSpeed = playerSprintSpeed / slowAmountPercent;
+                player.MoveSpeed = GameManager.Instance.GetPlayerSpeed / slowAmountPercent;
+                player.SprintSpeed = GameManager.Instance.GetPLayerSprintSpeed / slowAmountPercent;
             }
         }
         else if(other.CompareTag("Village"))
@@ -53,7 +44,7 @@ public class Ice : MonoBehaviour
             if(other.TryGetComponent<Villager>(out var villager))
             {
                 villager.SetAnimatorSpeed(slowAmountPercent / 4);
-                villager.navMeshAgent.speed = villagerSpeed / slowAmountPercent;
+                villager.navMeshAgent.speed = GameManager.Instance.GetVillagerSpeed / slowAmountPercent;
             }
         }
         else if(other.CompareTag("Monster"))
@@ -61,7 +52,7 @@ public class Ice : MonoBehaviour
             if(other.TryGetComponent<Monster>(out var monster))
             {
                 monster.SetAnimatorSpeed(slowAmountPercent / 4);
-                monster.navMeshAgent.speed = doctorSpeed / slowAmountPercent;
+                monster.navMeshAgent.speed = GameManager.Instance.GetMonsterSpeed / slowAmountPercent;
             }
         }
     }
@@ -73,8 +64,8 @@ public class Ice : MonoBehaviour
             var player = other.GetComponentInChildren<FirstPersonController>();
             if(player != null)
             {
-                player.MoveSpeed = playerSpeed;
-                player.SprintSpeed = playerSprintSpeed;
+                player.MoveSpeed = GameManager.Instance.GetPlayerSpeed;
+                player.SprintSpeed = GameManager.Instance.GetPLayerSprintSpeed;
             }
         }
         else if(other.CompareTag("Village"))
@@ -82,7 +73,7 @@ public class Ice : MonoBehaviour
             if(other.TryGetComponent<Villager>(out var villager))
             {
                 villager.SetAnimatorSpeed(1);
-                villager.navMeshAgent.speed = villagerSpeed;
+                villager.navMeshAgent.speed = GameManager.Instance.GetVillagerSpeed;
             }
         }
         else if(other.CompareTag("Monster"))
@@ -90,7 +81,7 @@ public class Ice : MonoBehaviour
             if(other.TryGetComponent<Monster>(out var monster))
             {
                 monster.SetAnimatorSpeed(1);
-                monster.navMeshAgent.speed = doctorSpeed;
+                monster.navMeshAgent.speed = GameManager.Instance.GetMonsterSpeed;
             }
         }
     }

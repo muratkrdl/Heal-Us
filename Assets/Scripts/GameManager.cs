@@ -41,11 +41,24 @@ public class GameManager : MonoBehaviour
     bool canUseAbility;
     bool goingHome;
 
-    public bool GetGoingHome
+    float playerSpeed;
+    float playerSprintSpeed;
+    float villagerSpeed;
+    float monsterSpeed;
+
+    public float GetPlayerSpeed
     {
         get
         {
-            return goingHome;
+            return playerSpeed;
+        }
+    }
+
+    public float GetPLayerSprintSpeed
+    {
+        get
+        {
+            return playerSprintSpeed;
         }
     }
 
@@ -53,7 +66,23 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return villagers[0].navMeshAgent.speed;
+            return villagerSpeed;
+        }
+    }
+
+    public float GetMonsterSpeed
+    {
+        get
+        {
+            return monsterSpeed;
+        }
+    }
+
+    public bool GetGoingHome
+    {
+        get
+        {
+            return goingHome;
         }
     }
 
@@ -84,6 +113,11 @@ public class GameManager : MonoBehaviour
         SetUnFade();
         if(pauseGamePanel.activeSelf)
             pauseGamePanel.SetActive(false);
+
+        monsterSpeed = GetMonster.GetComponent<Monster>().navMeshAgent.speed;
+        villagerSpeed = villagers[0].navMeshAgent.speed;
+        playerSpeed = GetPlayer.GetComponent<FirstPersonController>().MoveSpeed;
+        playerSprintSpeed = GetPlayer.GetComponent<FirstPersonController>().SprintSpeed;
     }
 
     void Update() 
@@ -319,6 +353,7 @@ public class GameManager : MonoBehaviour
     public void QuitButtonEvent()
     {
         StartCoroutine(QuitButtonRoutine());
+        goingHome = true;
         Time.timeScale = 1;
     }
     IEnumerator QuitButtonRoutine()

@@ -12,12 +12,11 @@ GameObject:
   - component: {fileID: 3081073891817239634}
   - component: {fileID: 2465993114077253553}
   - component: {fileID: 4951942056566895729}
-  - component: {fileID: 2873162761751556899}
   m_Layer: 0
   m_Name: Tomb_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5174823698688531382
@@ -32,8 +31,7 @@ Transform:
   m_LocalPosition: {x: -13, y: 2.145, z: 9}
   m_LocalScale: {x: 1.2499999, y: 1.2499999, z: 1.2499999}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 676239945110392438}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3081073891817239634
@@ -108,49 +106,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 5ee7764f4bf9e264aa81d77481e619c4, type: 3}
---- !u!114 &2873162761751556899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801348641655349889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac8776f58206ba4698b73d285565ae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiatePrefab: {fileID: 0}
-  graveyard: {fileID: 0}
-  spawnPoint: {fileID: 676239945110392438}
---- !u!1 &3306531493237395812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 676239945110392438}
-  m_Layer: 0
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &676239945110392438
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3306531493237395812}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5174823698688531382}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

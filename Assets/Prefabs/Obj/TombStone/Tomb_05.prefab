@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4195909119444290232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6477829394887383607}
-  m_Layer: 0
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &6477829394887383607
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4195909119444290232}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 1.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5129985324827610200}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6678054992408553658
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,12 +12,11 @@ GameObject:
   - component: {fileID: 2915016944116336955}
   - component: {fileID: 1280102416244878321}
   - component: {fileID: 962376733114653003}
-  - component: {fileID: -6924007450550453670}
   m_Layer: 0
   m_Name: Tomb_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5129985324827610200
@@ -63,8 +31,7 @@ Transform:
   m_LocalPosition: {x: -10, y: 2.03, z: 12}
   m_LocalScale: {x: 0.8792, y: 0.8792, z: 0.8792}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 6477829394887383607}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2915016944116336955
@@ -139,18 +106,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: afb6fd685664ed04286f0633f5d2b132, type: 3}
---- !u!114 &-6924007450550453670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6678054992408553658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ac8776f58206ba4698b73d285565ae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instantiatePrefab: {fileID: 0}
-  graveyard: {fileID: 0}
-  spawnPoint: {fileID: 6477829394887383607}
