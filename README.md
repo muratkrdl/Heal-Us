@@ -112,7 +112,7 @@ Come on, you need villagers, otherwise who will you buy pot from?
 
 #### Windows
 
-https://drive.google.com/file/d/1tpX2omI_lVCujYRXfI7WUznq0kfq3QYG/view?usp=sharing
+https://drive.google.com/file/d/1qKObhrpJmyd8VpzWIQ_EYciIPX66au52/view?usp=sharing
 
 
 ## Authors
