@@ -11,7 +11,6 @@ public class AbilityIcePotion : MonoBehaviour
     [SerializeField] float throwSpeed;
 
     int slowAmount;
-
     Vector3 rotateVector;
 
     public int SetSlowAmount
@@ -39,8 +38,11 @@ public class AbilityIcePotion : MonoBehaviour
 
     void OnCollisionEnter(Collision other) 
     {
+        Vector3 dir = -(transform.position - GameManager.Instance.GetPlayer.position).normalized;
+        dir.y = 0;
         SoundManager.Instance.PlaySound3D("Break Glass",transform.position);
-        Instantiate(IceFX,transform.position,Quaternion.identity);
+        var iceVFX = Instantiate(IceFX,transform.position,Quaternion.identity);
+        iceVFX.transform.position += dir * 3;
         IceFX.GetComponent<Ice>().SetSlowAmount = slowAmount;
         IceFX.GetComponent<Ice>().SetPercentSlowAmount();
         Destroy(gameObject,.1f);

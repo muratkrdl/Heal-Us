@@ -2252,7 +2252,7 @@ PrefabInstance:
     - target: {fileID: 1058628287310156828, guid: 4945c74ac15c7eb419f21a10d0a37916,
         type: 3}
       propertyPath: m_text
-      value: Quit
+      value: "Qu\u0131t"
       objectReference: {fileID: 0}
     - target: {fileID: 1058628287310156828, guid: 4945c74ac15c7eb419f21a10d0a37916,
         type: 3}

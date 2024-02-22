@@ -41,11 +41,11 @@ public class AbilityHeal : MonoBehaviour
             {
                 fpsAnimator.Heal();
             }
-            else if(Input.GetKeyUp(keyCode))
+            else if(Input.GetKeyUp(keyCode) || hit.transform.GetComponent<Villager>().GetIsDead)
             {
                 fpsAnimator.Idle();
                 StopAllCoroutines();
-                GameManager.Instance.HealFillAreaFillAmount = 0;
+                HideVisualArea();
             }
         }
         else
@@ -54,7 +54,7 @@ public class AbilityHeal : MonoBehaviour
             isHealing = false;
             fpsAnimator.Idle();
             StopAllCoroutines();
-            GameManager.Instance.HealFillAreaFillAmount = 0;
+            HideVisualArea();
         }
     }
 
@@ -90,6 +90,13 @@ public class AbilityHeal : MonoBehaviour
         float t = 0;
         while(true)
         {
+            if(Physics.Raycast(playerCam.position, transform.TransformDirection(Vector3.forward), out RaycastHit hit, range,layerMask))
+            {
+                if(hit.transform.GetComponent<Villager>().GetIsDead)
+                {
+                    HideVisualArea();
+                }
+            }
             elapsed += Time.deltaTime;
             t = elapsed / timer;
             GameManager.Instance.HealFillAreaFillAmount = Mathf.Lerp(GameManager.Instance.HealFillAreaFillAmount, 1, Time.deltaTime * t);

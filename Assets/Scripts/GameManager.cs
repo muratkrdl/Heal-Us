@@ -39,6 +39,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image healFillArea;
 
     bool canUseAbility;
+    bool goingHome;
+
+    public bool GetGoingHome
+    {
+        get
+        {
+            return goingHome;
+        }
+    }
 
     public float GetVillagerSpeed
     {
@@ -68,6 +77,7 @@ public class GameManager : MonoBehaviour
         DisableLightningCDCounter();
         DisablePoisonCDCounter();
         canUseAbility = true;
+        goingHome = false;
         healFillArea.fillAmount = 0;
         if(!fadeImage.gameObject.activeSelf)
             fadeImage.gameObject.SetActive(true);
@@ -297,6 +307,7 @@ public class GameManager : MonoBehaviour
     public void HomeButtonEvent()
     {
         StartCoroutine(HomeButtonRoutine());
+        goingHome = true;
         Time.timeScale = 1;
     }
     IEnumerator HomeButtonRoutine()

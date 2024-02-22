@@ -12,11 +12,6 @@ public class FPSAnimation : MonoBehaviour
     [SerializeField] UseIcePotion useIcePotion;
     [SerializeField] AbilityHeal abilityHeal;
 
-    public void Melee()
-    {
-        animator.SetTrigger("melee");
-    }
-
 #region CanUseAbility
     public void SetFalseCanUseAbility()
     {

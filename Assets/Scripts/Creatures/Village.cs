@@ -255,6 +255,7 @@ public class Villager : MonoBehaviour
     IEnumerator StartDieTimer()
     {
         yield return new WaitForSeconds(lifeTime);
+        SetAnimatorSpeed(1);
         Die();
     }
 
@@ -277,6 +278,10 @@ public class Villager : MonoBehaviour
             animator.SetTrigger("Die2");
         }
         navMeshAgent.enabled = false;
+    }
+
+    public void DisableCollider()
+    {
         foreach (var item in GetComponents<BoxCollider>())
         {
             item.enabled = false;

@@ -62,6 +62,7 @@ public class XPPanel : MonoBehaviour
 
     void Update() 
     {
+        if(GameManager.Instance.GetGoingHome) { return; }
         if(levelUpPanel.GetComponent<LevelUpPanel>().IsThinking)
         {
             if(Time.timeScale != 0)
