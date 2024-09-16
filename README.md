@@ -108,12 +108,6 @@ Come on, you need villagers, otherwise who will you buy pot from?
 <img src="https://github.com/muratkrdl/Heal-Us/blob/main/Pictures%20and%20Gifs/Gifs/Win-Scene.gif" width="auto">
 
 
-# Builds
-
-#### Windows
-
-https://drive.google.com/file/d/1O-di5wOB7PtHuKBQQLdpvLPhEvh-TLIW/view?usp=sharing
-
 
 ## Authors
 
